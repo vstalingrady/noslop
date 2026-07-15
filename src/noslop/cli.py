@@ -1,4 +1,4 @@
-"""noslop CLI — score text with StoryScope paper models."""
+"""noslop CLI — local XGBoost score from feature JSON only."""
 
 from __future__ import annotations
 
@@ -6,7 +6,6 @@ import argparse
 import sys
 from pathlib import Path
 
-# editable / repo run
 _SRC = Path(__file__).resolve().parents[1]
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
@@ -19,18 +18,33 @@ from noslop.score import score
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="noslop",
-        description="Score writing with StoryScope (arXiv:2604.03136) XGBoost detectors",
+        description=(
+            "Local StoryScope XGBoost scorer (arXiv:2604.03136). "
+            "Requires --features JSON. No API extract."
+        ),
     )
     parser.add_argument("--version", action="version", version=f"noslop {__version__}")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
-    p_score = sub.add_parser("score", help="Score a text file (StoryScope human vs AI)")
-    p_score.add_argument("path", type=Path, help="Text file to score")
+    p_score = sub.add_parser("score", help="Score feature JSON with local XGBoost")
+    p_score.add_argument(
+        "path",
+        type=Path,
+        nargs="?",
+        default=None,
+        help="Optional label path (draft text); not read for extract",
+    )
+    p_score.add_argument(
+        "--features",
+        type=Path,
+        required=True,
+        help="Feature JSON: {\"features\": {...}} or flat id→value map",
+    )
     p_score.add_argument(
         "--model",
         choices=["narrative", "full"],
         default="narrative",
-        help="binary_narrative (default) or binary_full",
+        help="noslop_binary_narrative (default) or full",
     )
     p_score.add_argument(
         "--threshold",
@@ -40,46 +54,26 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_score.add_argument("--json", action="store_true", help="JSON output")
     p_score.add_argument(
-        "--features",
-        type=Path,
-        default=None,
-        help="Skip LLM extract; use precomputed features JSON",
-    )
-    p_score.add_argument(
         "--dump-features",
         type=Path,
         default=None,
-        help="Write extracted features JSON here",
-    )
-    p_score.add_argument(
-        "--extract-model",
-        default=None,
-        help="OpenAI model for feature extraction (default gpt-4o-mini / NOSLOP_EXTRACT_MODEL)",
+        help="Copy features JSON here",
     )
 
     args = parser.parse_args(argv)
 
     if args.cmd == "score":
-        if not args.path.is_file() and args.features is None:
-            print(f"File not found: {args.path}", file=sys.stderr)
+        if not args.features.is_file():
+            print(f"Features file not found: {args.features}", file=sys.stderr)
             return 2
         try:
-            if args.features is not None:
-                result = score(
-                    features_path=args.features,
-                    model_name=args.model,
-                    threshold=args.threshold,
-                    dump_features_path=args.dump_features,
-                )
-                result["path"] = str(args.path) if args.path else str(args.features)
-            else:
-                result = score(
-                    text_path=args.path,
-                    model_name=args.model,
-                    threshold=args.threshold,
-                    extract_model=args.extract_model,
-                    dump_features_path=args.dump_features,
-                )
+            result = score(
+                features_path=args.features,
+                model_name=args.model,
+                threshold=args.threshold,
+                dump_features_path=args.dump_features,
+                path_label=str(args.path) if args.path else str(args.features),
+            )
         except FileNotFoundError as e:
             print(str(e), file=sys.stderr)
             return 2
