@@ -1,12 +1,6 @@
-# Runtime: paper XGBoost scorer only
+# Optional CLI scorer only (skill default is inline grade — no deps)
 numpy>=1.24
 xgboost>=2.0
 
-# Optional — LLM feature extraction (pick one provider)
-# openai>=1.30
-# anthropic>=0.30
-# google-genai>=1.0
-# pyyaml>=6.0
-
-# Optional — rebuild encoder_state from StoryScope parquet
+# Optional train from StoryScope parquet
 # pyarrow>=14.0

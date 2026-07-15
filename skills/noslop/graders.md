@@ -1,42 +1,27 @@
-# Five structure graders (copy pack)
+# Inline structure grade (no subagents)
 
-Spawn five agents. Same draft. Different axis name only.
+Use inside the same turn after drafting. Do not spawn agents.
 
-## Shared skeleton
+## Checklist
+
+1. **Theme** — moral/lesson stated out loud?
+2. **Plot** — too tidy / restatement closers?
+3. **Time** — rigid linear only? (short text → N/A)
+4. **Specificity** — concrete anchors?
+5. **Felt life** — plain feeling / mess, not only body catalog?
+
+## Block to emit
 
 ```text
-You are grader axis: {AXIS}.
-Judge STRUCTURE only.
-
-Draft:
----
-{DRAFT}
----
-
-Return exactly:
-AXIS: {AXIS}
-SCORE: 0-2
-VERDICT: PASS | FAIL | N/A
-WHY: one sentence
-FIX: one structural change if FAIL else none
+NOSLOP GRADE
+Theme:       SCORE 0-2  PASS|FAIL|N/A  — …
+Plot:        SCORE 0-2  PASS|FAIL|N/A  — …
+Time:        SCORE 0-2  PASS|FAIL|N/A  — …
+Specificity: SCORE 0-2  PASS|FAIL|N/A  — …
+Felt life:   SCORE 0-2  PASS|FAIL|N/A  — …
+MEAN: x.x
+MERGED: PASS|FAIL
+FIX: …
 ```
 
-## Axis 1 — Theme
-
-Fail if the text states its own moral, lesson, or “what this really means.” Humans often leave meaning inferred.
-
-## Axis 2 — Plot / argument
-
-Fail if every conflict resolves neatly, every paragraph closes by restating itself, or the path is single-track with zero friction.
-
-## Axis 3 — Time / order
-
-Fail if a longer piece never breaks pure linear march (no aside, flashback, delayed fact, or reorder). Short tweets may N/A.
-
-## Axis 4 — Specificity
-
-Fail if claims stay abstract with no names, numbers, places, times, or concrete objects.
-
-## Axis 5 — Felt life
-
-Fail if feeling is only body/sense inventory, or the voice never shows doubt, friction, or plain “I was pissed / scared / tired.”
+Merge: mean ≥ 1.2 of scored axes, at most one FAIL → PASS.
