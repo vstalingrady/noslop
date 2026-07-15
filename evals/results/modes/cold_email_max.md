@@ -6,7 +6,7 @@ I'm writing after staring at a public-ish booking export (names stripped). Thurs
 
 I fix that class of lie. Jakarta timezone. Shared sheet, three days, not a platform pitch.
 
-Twist people miss: often not missing patients — double-booked slots marked attended. Tuesday 4:05 I showed that once; ops lead went quiet.
+Here's the turn: often not missing patients — double-booked slots marked attended. Tuesday 4:05 I showed that once; ops lead went quiet. Aftermath isn't a deck. It's a marked CSV and a quiet inbox.
 
 Reply with any ugly Tuesday CSV. Marked version by Friday 5 p.m. WIB. +62 812-0000-4411 (WhatsApp ok).
 

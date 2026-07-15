@@ -3,48 +3,68 @@ name: noslop
 description: >-
   Use when drafting or rewriting user-facing prose that must not read as AI-slop,
   or when the user says noslop, write human, anti AI voice, or /noslop. Not for
-  code cleanup. Primary gate is VOICE (reader anti-slop), not StoryScope P(human).
+  code cleanup. North star: StoryScope construction findings + human flow — not
+  maxing VOICE or StoryScope P(human).
 ---
 
 # noslop
 
-Write so a careful reader doesn’t bounce. **Human flow first.** Construction + mess; bans second. Do not max scores until the page is stiff.
+Grounded in StoryScope (arXiv:2604.03136): AI prose often **over-explains themes** and runs **tidy single-track** arcs; humans leave **greyer choices**, **messier time**, and more **diversity**. Full paper notes: [paper.md](paper.md).
 
-**Modes:** see [modes.md](modes.md). Default ship intensity = **balanced**. **max** is research only. High scores with unreadable craft = failure.
+## Ship bar (iron law)
 
-StoryScope / XGBoost is **optional diagnostic only**. Books mean ~0.13 P(human) on that scorer — a “low” StoryScope band can still be good writing.
+```
+Ship bar: careful human finishes the page without fatigue or template nausea.
+Do not maximize VOICE or StoryScope at the cost of flow.
+Mode default = balanced. max = research only.
+Score-max with stiff craft = FAIL even if numbers look great.
+```
 
 **Violating the letter of these rules is violating the spirit of the rules.**
 
 ```
-NO SHIP WITHOUT: PRE-WRITE (incl. Mode) + draft + NOSLOP VOICE (no hard_fail)
-Default Mode = balanced. Do not require VOICE 9+ or StoryScope P(human) ≥ 0.5.
+NO SHIP WITHOUT: PRE-WRITE (incl. Mode) + draft + no VOICE hard_fail
+Do NOT require VOICE 9+ or StoryScope P(human) ≥ 0.5.
+Book-band StoryScope (~0.1–0.3) with honest labels is OK when the page flows.
 ```
 
-## When to use
+## Genre split (critical)
 
-- Stories, emails, bios, reports, landing copy, long agent answers
-- User wants human-sounding / less slop / noslop
+| Form | Primary rules |
+|------|----------------|
+| **Long fiction** (stories, chapters, ~1k+ words) | Paper construction: less theme lecture, greyer moral choice, temporal texture when length allows, avoid tidy single-track lesson close + flow |
+| **Short agent prose** (email, bio, blurb, answers) | Flow + anti-glue + anchors when natural — **do not** force novel discourse toys (extended aftermath, frame/memoir, theme scales, multi-scene moral arc) |
+| **StoryScope score / features** | Lab only; long-form or explicit research; honest extract/label; never forge; never ship gate |
 
-## When not to use
+## Modes
 
-- Code cleanup
-- Pure data dumps where voice does not matter
+See [modes.md](modes.md).
+
+| Mode | Role |
+|------|------|
+| **modest** | Unforced letters/notes; light skill |
+| **balanced** | **DEFAULT SHIP** |
+| **max** | Research / stress craft only — label it; expect readability cost |
+
+## When to use / not
+
+**Use:** stories, emails, bios, reports, landing copy, long agent answers; user wants human-sounding / less slop / noslop.  
+**Skip:** code cleanup; pure data dumps where voice does not matter.
 
 ## Core pattern
 
 ```
-1. Fill NOSLOP PRE-WRITE
-2. Draft so PRE-WRITE lines show on the page
-3. Fill NOSLOP VOICE grade (or run CLI voice)
-4. FAIL → structural FIX only (max 2 rounds) — not synonym swaps
-5. Surface ban scan (style-and-bans.md) once
-6. Optional: StoryScope features + score (diagnostic footnote only)
-7. Ship with VOICE evidence
+1. Fill NOSLOP PRE-WRITE (Mode required; default balanced)
+2. Draft for the genre (fiction construction OR short-prose flow — see split)
+3. Check VOICE for hard fails only (sermon close, ban/glue spam, zero anchors on long text)
+4. FAIL hard → structural FIX (max 2 rounds) — not synonym swaps
+5. Surface ban scan once ([style-and-bans.md](style-and-bans.md))
+6. Optional lab: StoryScope features + score — footnote only
+7. Ship when a careful human would finish the page
 ```
 
-Refs: [modes.md](modes.md) · [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
-Optional StoryScope: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
+Refs: [paper.md](paper.md) · [modes.md](modes.md) · [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
+Lab only: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
 
 ## PRE-WRITE (required)
 
@@ -52,50 +72,48 @@ Optional StoryScope: [human_coding.md](human_coding.md) · [core_features.md](co
 NOSLOP PRE-WRITE
 Mode: modest | balanced | max
 Audience:
-Length / form:
+Length / form:   (short agent | long fiction)
 Anchors (name / number / place / time):
 One deliberate mess / open cost / incomplete beat:
 One boring detail with no payoff:
-What I will NOT force (skip: frame | twist | theme line | long aftermath):
-Where short hits land:
+What I will NOT force (for short: skip novel toys; for fiction: skip theme dump / tidy lesson):
+Where short hits land (if natural):
 Surface risk for this genre:
 ```
 
 If Mode omitted → **balanced**.
 
-## Draft recipe (by mode)
+## Draft by genre
 
-Follow [modes.md](modes.md). For **balanced** (default):
+### Short agent prose (default for emails, bios, blurbs, Q&A)
 
-| Do | How it shows |
-|----|----------------|
-| Flow first | A person would finish the page without fatigue |
-| Anchors | real names/times/places when they help — not a stampede |
-| Uneven | one skip or digression if natural |
-| No thesis close | end on image/action/cutoff |
-| Clean surface | no glue/ban spam |
+| Do | Don’t |
+|----|--------|
+| Real anchors when they help | Force aftermath / twist / theme-4 stacks |
+| One concrete ask or image | Sermon or “I used to think… turns out” close |
+| Digression OK if natural | Score-farm staccato every line “earns” |
+| Clean of glue/bans | Chase VOICE 9+ |
 
-**modest:** lighter still — digression OK, fewer checklist beats.  
-**max:** full craft pressure (research); label it; expect readability cost.
+### Long fiction (paper construction)
 
-**Do not** primary-optimize StoryScope must-hit stacks or VOICE 9+ as the win condition.
+| Do | Don’t |
+|----|--------|
+| Theme in scene / action, not narrator TED talk | Explicit moral restatement as ending |
+| Grey choice / open cost | Single-track tidy internal-acceptance bow |
+| Time texture when length allows (jump, delay, flash) | Fake multi-scene aftermath on a 100-word beat |
+| Specific world (names, places, real mess) | Vague allusions + body-emotion formula only |
 
-## VOICE grade (required)
+**modest:** lighter still. **max:** full craft pressure (research); label it.
 
-```text
-NOSLOP VOICE
-anchors:     0-2  PASS|FAIL
-uneven:      0-2  PASS|FAIL
-moral_close: 0-2  PASS|FAIL   (2 = clean)
-rhythm:      0-2  PASS|FAIL
-glue_bans:   0-2  PASS|FAIL
-MEAN: x.x
-HARD: none | moral_close_sermon | ban_spam | zero_anchors
-MERGED: PASS|FAIL
-FIX: …
-```
+## VOICE (soft anti-glue — not human-quality score)
 
-CLI (preferred when available):
+Hard fails only for ship block:
+
+- moral/sermon close
+- ban/glue spam
+- zero anchors on long prose
+
+Prefer mid-range readable prose over a 9+ checklist. Details: [voice.md](voice.md).
 
 ```powershell
 cd path\to\noslop
@@ -103,32 +121,31 @@ $env:PYTHONPATH="src"
 .\.venv\Scripts\python.exe -m noslop.cli voice --text-file draft.md --json
 ```
 
-Ship bar (**balanced**): no hard_fail; prefer score ≥ ~5.5–7. Do **not** require 9+.  
-**modest:** soft; prioritize flow. **max:** research; high score OK only if labeled.
+## StoryScope (lab only)
 
-## StoryScope mode (optional)
+Only if user asks for diagnostic:
 
-Only if user asks for StoryScope / P(human) diagnostic:
-
-1. Fill features with span cites ([core_features.md](core_features.md))
+1. Honest labels with span cites — never forge ([human_coding.md](human_coding.md))
 2. `python -m noslop.cli score --features features.json --json`
-3. Report as footnote — **never sole ship gate**
-4. Do not require P(human) ≥ 0.5 for ship
+3. Footnote only — **never** sole ship gate
+4. Do not require P(human) ≥ 0.5
 
 ## Red flags — STOP
 
-- Shipping without PRE-WRITE or VOICE PASS
-- Chasing StoryScope 0.5 while VOICE fails
+- Shipping without PRE-WRITE
+- Chasing StoryScope 0.5 or VOICE 9+ while the page is stiff
+- Novel toys on a cold email
+- Theme lecture / tidy lesson as last beat of fiction
 - FIX = synonym swaps only
 - Thesis closer as last paragraph
-- Zero anchors on long prose
 - Ban/glue spam
 
 ## Rationalizations
 
 | Excuse | Reality |
 |--------|---------|
-| “StoryScope says PASS” | Optional metric; books score ~0.13 |
-| “Sounds fine to me” | Fill VOICE axes or run CLI |
-| “Bans list is the skill” | Construction + mess first |
-| “I’ll force the full arc pack” | Anti-template; over-complete craft still smells model-made |
+| “StoryScope says PASS / 0.7” | Lab metric; books ~0.13; not ship bar |
+| “VOICE is 9.1 so ship” | High score + stiff craft = fail |
+| “Bans list is the skill” | Construction + flow first; paper.md |
+| “I’ll force the full arc pack” | Anti-template; over-complete craft smells model-made |
+| “Email needs aftermath + twist” | Genre split — short prose doesn’t |

@@ -1,14 +1,18 @@
-# noslop modes — VOICE comparison
+# noslop modes — flow over score (paper realign)
 
-Human flow over score maxing. Scored with `noslop.voice.score_voice` / CLI voice path.
-StoryScope optional: not run for this table (no forged features).
+StoryScope (arXiv:2604.03136) measured **discourse construction** on fiction,
+not “maximize this VOICE number.” Ship bar = careful human finishes the page.
 
-## Scores
+Scored with `noslop.voice.score_voice` / CLI voice path as **soft anti-glue only**.
+VOICE numbers are **not** a flow ranking. Read the drafts.
+StoryScope binary not run here (no forged features).
+
+## Scores (informative only)
 
 | Brief | default | modest | balanced | max |
 |-------|---------|--------|----------|-----|
-| mall_shoe | 0.88 | 8.07 | 8.25 | 9.12 |
-| cold_email | 4.91 | 10.00 | 9.12 | 9.12 |
+| mall_shoe | 0.88 | 8.07 | 8.25 | 7.19 |
+| cold_email | 4.91 | 10.00 | 9.12 | 8.07 |
 
 ## Gates (hard_fail)
 
@@ -17,14 +21,20 @@ StoryScope optional: not run for this table (no forged features).
 | mall_shoe | HARD | pass | pass | pass |
 | cold_email | HARD | pass | pass | pass |
 
+## Human-flow notes (primary judge)
+
+- **modest** — unforced; digression OK; fewest craft stamps.
+- **balanced** — **ship default**; readable; anti-glue/sermon; no arc-toy dump.
+- **max** — research only: frame/turn/aftermath stamps on purpose; stiffer; **not** product win even if VOICE is high.
+- **default** — control slop (glue + sermon).
+
 ## Recommendation
 
-- **Ship default intensity: balanced** — readable, anti-glue/sermon, not score-farm.
-- **modest** — natural letters / low-pressure notes.
-- **max** — research only; expect stiff craft when numbers climb.
-- **default** — control arm (slop), not a skill mode.
-
-High VOICE with unreadable prose = failure. Book-band StoryScope (~0.1–0.3) is OK when flow is good.
+- **Ship: balanced.**
+- **modest** for natural letters / low pressure.
+- **max** only when labeled research / stress craft.
+- High VOICE + stiff craft = failure. Book-band StoryScope (~0.1–0.3) OK when flow is good.
+- Longform StoryScope illustration: **skipped** this cycle (optional; not ship bar).
 
 ## Drafts
 

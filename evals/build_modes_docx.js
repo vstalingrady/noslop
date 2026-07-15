@@ -1,5 +1,5 @@
 /**
- * Build noslop modes comparison DOCX from evals/results/modes drafts + voice JSON.
+ * Build noslop modes comparison DOCX — paper thesis + flow over score.
  */
 const fs = require("fs");
 const path = require("path");
@@ -36,7 +36,7 @@ const MODE_LABEL = {
   default: "default (control — raw slop)",
   modest: "modest (natural flow)",
   balanced: "balanced (ship default)",
-  max: "max (research / craft pressure)",
+  max: "max (research / craft pressure — not product)",
 };
 
 const border = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
@@ -191,7 +191,7 @@ async function main() {
   );
   children.push(
     p(
-      "Human flow over score maxing. Same briefs, four intensities. VOICE scores from the real noslop CLI path. StoryScope not required; book-band scores (~0.1–0.3) can still mean good writing.",
+      "Paper: StoryScope (arXiv:2604.03136) — discourse construction on fiction (theme over-explain, tidy single-track vs moral ambiguity, temporal complexity, diversity). Ship bar = careful human finishes the page. VOICE is soft anti-glue only; numbers are not flow ranking.",
       { after: 200, italics: true, size: 20 }
     )
   );
@@ -199,7 +199,12 @@ async function main() {
   children.push(h1("1. Problem"));
   children.push(
     p(
-      "When we max VOICE or StoryScope feature packs, numbers climb and the page often gets stiff: checklist craft, even completion, every beat pays off. Real books can sit near ~0.13 P(human) on StoryScope and still flow. High metric + low readability is failure. This report compares modes so we stop shipping “max” as if it were “best.”"
+      "We lost the plot: checklist craft + max VOICE/StoryScope produced high numbers and stiff pages. StoryScope measured how stories are built on ~5k-word fiction, with features extracted then classified — not forged to raise P(human). Books can sit near ~0.13–0.27 P(human) and still flow. High metric + low readability is failure. This report compares modes so we stop shipping “max” as if it were “best.”"
+    )
+  );
+  children.push(
+    p(
+      "Genre split: long fiction gets paper construction (less theme dump, greyer choices, time texture when length allows). Short agent prose gets flow + anti-glue — do not force novel toys on emails."
     )
   );
 
@@ -219,14 +224,14 @@ async function main() {
   );
   children.push(
     p(
-      "max — Research only. Full craft pressure (dense anchors, stamp-ready unevenness, optional StoryScope toys). Document the readability cost."
+      "max — Research only. Full craft pressure (frame/turn/aftermath stamps, dense checklist). Document the readability cost. Not the product path even if VOICE is highest."
     )
   );
 
-  children.push(h1("3. VOICE scores"));
+  children.push(h1("3. VOICE scores (not flow ranking)"));
   children.push(
     p(
-      "Scored with python -m noslop.cli voice / score_voice. Pass threshold for research tables is informative; ship intensity is balanced, not max.",
+      "Scored with python -m noslop.cli voice / score_voice. Informative only. Ship intensity is balanced, not max. Read drafts — VOICE ≠ human preference.",
       { size: 20, italics: true }
     )
   );
@@ -234,7 +239,7 @@ async function main() {
   children.push(p(" ", { after: 120 }));
   children.push(
     p(
-      "Note: VOICE is a heuristic. A high modest score (e.g. a short clean email) does not mean max is more human-readable — read the drafts.",
+      "Note: a high max score does not mean max is more human-readable. Primary judge is whether a careful human finishes the page.",
       { size: 18, italics: true, color: "555555" }
     )
   );
@@ -242,13 +247,16 @@ async function main() {
   children.push(h1("4. Recommendation"));
   children.push(
     p(
-      "Ship balanced as the default skill intensity. Use modest for natural letters and low-pressure notes. Use max only when the user asks for research / stress craft — and label it. Never treat the highest VOICE number as the product goal."
+      "Ship balanced as the default skill intensity. Use modest for natural letters and low-pressure notes. Use max only when the user asks for research / stress craft — and label it. Never treat the highest VOICE or StoryScope number as the product goal. Do not require P(human) ≥ 0.5. Do not forge features."
+    )
+  );
+  children.push(
+    p(
+      "Warning against max-as-product: max arms intentionally show craft stamps (“I’m writing this after…”, “Here’s the turn”, aftermath framing). That is research illustration of score-farm stiffness, not the ship recipe."
     )
   );
 
-  children.push(
-    new Paragraph({ children: [new PageBreak()] })
-  );
+  children.push(new Paragraph({ children: [new PageBreak()] }));
   children.push(h1("5. Full drafts"));
 
   for (const brief of BRIEFS) {
@@ -269,7 +277,7 @@ async function main() {
   children.push(h1("6. Files"));
   children.push(
     p(
-      "Drafts: evals/results/modes/*.md  ·  Scores: *_voice.json  ·  SUMMARY.md  ·  Skill: skills/noslop/modes.md"
+      "Drafts: evals/results/modes/*.md  ·  Scores: *_voice.json  ·  SUMMARY.md  ·  Skill: skills/noslop/modes.md  ·  Paper: skills/noslop/paper.md  ·  arXiv:2604.03136"
     )
   );
 
@@ -311,7 +319,7 @@ async function main() {
               new Paragraph({
                 children: [
                   new TextRun({
-                    text: "noslop · modes comparison · human flow over score maxing",
+                    text: "noslop · modes · paper construction + human flow (not score max)",
                     font: "Arial",
                     size: 16,
                     color: "666666",

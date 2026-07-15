@@ -104,4 +104,5 @@
 
 ## Deviations
 
-(append only during execution)
+- max mode arms intentionally include craft stamps (“Here's the turn”, aftermath framing); VOICE may score **lower** than modest/balanced — intended (flow > number; max = research stiffness demo).
+- Optional longform StoryScope sample under `evals/results/longform/`: **skipped** (documented in modes SUMMARY).

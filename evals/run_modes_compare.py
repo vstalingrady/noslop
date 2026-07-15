@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -13,7 +14,12 @@ sys.path.insert(0, str(ROOT / "src"))
 from noslop.voice import score_voice  # noqa: E402
 
 RES = ROOT / "evals" / "results" / "modes"
-SCRATCH = Path(r"C:\Users\vstal\AppData\Local\Temp\grok-goal-db7190bf0214\implementer\modes_voice")
+_SCRATCH_ENV = os.environ.get("NOSLOP_SCRATCH")
+SCRATCH = Path(
+    _SCRATCH_ENV
+    if _SCRATCH_ENV
+    else r"C:\Users\vstal\AppData\Local\Temp\grok-goal-34f82acb64b7\implementer\modes_voice"
+)
 BRIEFS = ["mall_shoe", "cold_email"]
 ARMS = ["default", "modest", "balanced", "max"]
 
@@ -49,12 +55,16 @@ def main() -> int:
             )
 
     lines = [
-        "# noslop modes — VOICE comparison",
+        "# noslop modes — flow over score (paper realign)",
         "",
-        "Human flow over score maxing. Scored with `noslop.voice.score_voice` / CLI voice path.",
-        "StoryScope optional: not run for this table (no forged features).",
+        "StoryScope (arXiv:2604.03136) measured **discourse construction** on fiction,",
+        "not “maximize this VOICE number.” Ship bar = careful human finishes the page.",
         "",
-        "## Scores",
+        "Scored with `noslop.voice.score_voice` / CLI voice path as **soft anti-glue only**.",
+        "VOICE numbers are **not** a flow ranking. Read the drafts.",
+        "StoryScope binary not run here (no forged features).",
+        "",
+        "## Scores (informative only)",
         "",
         "| Brief | default | modest | balanced | max |",
         "|-------|---------|--------|----------|-----|",
@@ -81,14 +91,20 @@ def main() -> int:
         )
     lines += [
         "",
+        "## Human-flow notes (primary judge)",
+        "",
+        "- **modest** — unforced; digression OK; fewest craft stamps.",
+        "- **balanced** — **ship default**; readable; anti-glue/sermon; no arc-toy dump.",
+        "- **max** — research only: frame/turn/aftermath stamps on purpose; stiffer; **not** product win even if VOICE is high.",
+        "- **default** — control slop (glue + sermon).",
+        "",
         "## Recommendation",
         "",
-        "- **Ship default intensity: balanced** — readable, anti-glue/sermon, not score-farm.",
-        "- **modest** — natural letters / low-pressure notes.",
-        "- **max** — research only; expect stiff craft when numbers climb.",
-        "- **default** — control arm (slop), not a skill mode.",
-        "",
-        "High VOICE with unreadable prose = failure. Book-band StoryScope (~0.1–0.3) is OK when flow is good.",
+        "- **Ship: balanced.**",
+        "- **modest** for natural letters / low pressure.",
+        "- **max** only when labeled research / stress craft.",
+        "- High VOICE + stiff craft = failure. Book-band StoryScope (~0.1–0.3) OK when flow is good.",
+        "- Longform StoryScope illustration: **skipped** this cycle (optional; not ship bar).",
         "",
         "## Drafts",
         "",

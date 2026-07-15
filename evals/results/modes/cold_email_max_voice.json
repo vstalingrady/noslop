@@ -1,7 +1,7 @@
 {
   "brief": "cold_email",
   "mode": "max",
-  "score": 9.12,
+  "score": 8.07,
   "gate": "pass",
   "hard_fail": false,
   "hard_reasons": [],
@@ -10,7 +10,7 @@
     "uneven": 2,
     "moral_close": 2,
     "rhythm": 1,
-    "glue_bans": 2
+    "glue_bans": 1
   },
   "path": "evals/results/modes/cold_email_max.md"
 }
