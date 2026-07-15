@@ -1,0 +1,19 @@
+{
+  "label": "AI",
+  "p_human": 0.11895805597305298,
+  "p_ai": 0.881041944026947,
+  "n_features": 761,
+  "model_n_features": 761,
+  "gate": "fail",
+  "threshold": 0.5,
+  "min_coverage": null,
+  "coverage": 0.1018867924528302,
+  "model_name": "binary_narrative",
+  "model_path": "C:\\Users\\vstal\\noslop\\artifacts\\models\\noslop_binary_narrative.json",
+  "features_extracted": 27,
+  "features_expected": 265,
+  "extractor_model": null,
+  "warning": "sparse_features; score may be floor-biased",
+  "paper": "arXiv:2604.03136",
+  "path": "evals\\results\\human\\woolf_lighthouse_features.json"
+}

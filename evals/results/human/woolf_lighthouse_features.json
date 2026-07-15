@@ -1,0 +1,43 @@
+{
+  "features": {
+    "PLT_MOR_007": "none_or_minimal (story ends immediately after climax)",
+    "SIT_MET_303": "2",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "slice_of_life",
+      "frame_confession/memoir"
+    ],
+    "AGENT_EMO_009": "embodied_sensations_and_metaphors",
+    "SIT_MET_008": "None (no discernible references)",
+    "TMP_DUR_008": "3_relative_day_and_duration_markers",
+    "PER_POV_001": "third_person",
+    "PLT_THM_004": [
+      "family/generation",
+      "identity/selfhood"
+    ],
+    "AGENT_ATTR_001": "in-dialogue (they speak before being described)",
+    "PLT_THM_006": "coming_of_age/initiation",
+    "TMP_DUR_011": "past",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_GEN_001": "literary_realist_fiction",
+    "SIT_MET_501": "yes",
+    "PLT_MOR_001": "implicit_moral_inferred_from_outcomes_and_tone",
+    "REV_DIS_002": "mix_of_small_and_large_reveals",
+    "AGENT_ROLE_001": "active protagonist driving the main plot",
+    "EVT_CAU_001": "mixed_explicit_and_implicit",
+    "SET_ATM_005": "3_moderate",
+    "TMP_ORD_001": "strictly_chronological",
+    "PER_FOC_009": "2_occasional_overt_moral_or_evaluative_comments",
+    "SIT_GEN_010": "3",
+    "SIT_MET_002": "no direct address",
+    "PLT_THM_005": "unresolved (tensions deliberately left open)",
+    "EVT_SCH_004": "open_or_ambiguously_unresolved",
+    "REV_DIS_016": [
+      "character_dialogue",
+      "internal_monologue_free_indirect_style",
+      "narrator_direct_exposition"
+    ]
+  },
+  "source": "Virginia Woolf, To the Lighthouse (1927) \u2014 public domain in US",
+  "id": "woolf_lighthouse"
+}

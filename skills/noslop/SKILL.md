@@ -1,132 +1,128 @@
 ---
 name: noslop
 description: >-
-  Use when drafting or rewriting user-facing prose that must not read as AI-slop,
-  or when the user says noslop, write human, anti AI voice, or /noslop. Not for
-  code cleanup.
+  Use when drafting or rewriting user-facing prose that must score human on
+  StoryScope / noslop P(human), or when the user says noslop, write human,
+  anti AI voice, or /noslop. Not for code cleanup.
 ---
 
 # noslop
 
-Human writing is built differently — construction first, polish second.
+AI text can score **human** when construction matches human narrative coding —
+not when you only ban “delve” or leave every thread open.
 
 **Violating the letter of these rules is violating the spirit of the rules.**
 
 ```
-NO SHIP WITHOUT FILLED PRE-WRITE + NOSLOP GRADE (MERGED: PASS)
+NO SHIP WITHOUT: PRE-WRITE + draft with human-coding in PROSE + features.json
+(with span cites) + CLI score evidence
 ```
 
 ## When to use
 
-- Articles, emails, stories, bios, reports, tweets, long agent answers
-- User wants human-sounding text / noslop / anti AI voice
+- Stories, emails, bios, reports, landing copy, long agent answers
+- User wants human-sounding text / higher StoryScope P(human)
 
 ## When not to use
 
-- Code cleanup or refactor “deslop”
+- Code cleanup
 - Pure data dumps where voice does not matter
 
 ## Core pattern
 
-Positive contracts, not ban lists.
-
 ```
-1. Fill NOSLOP PRE-WRITE (create checklist for THIS piece)
-2. Draft to satisfy those slots
-3. Fill NOSLOP GRADE (required shape)
-4. FAIL → structural FIX only → re-grade (max 2 rounds)
-5. Ship with grade evidence in-thread
+1. Fill NOSLOP PRE-WRITE (include aftermath, twist, embodied beat, frame)
+2. Draft so human_coding.md targets are visible in the prose
+3. Fill features.json (high-gain pack fully) — each value needs a cited span
+4. Run CLI score (repo venv, PYTHONPATH=src)
+5. FAIL or P(human) < 0.5 → structural FIX targeting feature gaps (max 2 rounds)
+6. Ship draft + features + score JSON
 ```
 
-Templates: [checklists.md](checklists.md)  
-Surface reference: [style-and-bans.md](style-and-bans.md)  
-Local score features: [core_features.md](core_features.md)
+References:
+
+- [human_coding.md](human_coding.md) — must-hit constructions
+- [checklists.md](checklists.md) — PRE-WRITE / GRADE / SCORE templates
+- [core_features.md](core_features.md) — feature IDs to fill
+- [style-and-bans.md](style-and-bans.md) — surface polish **after** score loop
 
 ## PRE-WRITE (required)
-
-Emit and fill before drafting:
 
 ```text
 NOSLOP PRE-WRITE
 Audience:
 Length / form:
-Specific anchors I will use (name / number / place / time — at least one):
-One deliberate mess, grey choice, or open thread:
-How theme will be shown (not stated):
-Rhythm note (where short hits land):
-Surface risk for this genre (one line):
+Specific anchors (name / number / place / time):
+Aftermath plan (what happens after climax — required):
+End turn / twist (what recontextualizes the piece):
+Embodied emotion beat (body + sensation):
+Frame device if any (log / later tell / none):
+Theme surface (where meaning is allowed to show — not silent):
+Rhythm note:
+Surface risk:
 ```
 
 Then write so every filled line is visible in the draft.
 
-## Draft recipe
-
-Build toward human construction:
+## Draft recipe (human-coding)
 
 | Do | How it shows |
 |----|----------------|
-| Trust the reader | Meaning in action/image, not a lesson line |
-| Leave friction when real | Open thread, grey choice, or cost |
-| Anchor | Names, numbers, times, places |
+| Extended aftermath | Second scene or time-jump after the peak |
+| End turn | Late reframe of the object, choice, or claim |
+| Embodied feeling | Cold tile, weight in hand, throat — not only “sad” |
+| Theme surface | Thought/speech lets meaning show (level 3–4) — not zero, not pure lecture |
+| Frame when possible | Log, memoir, “I’m writing this after…” |
+| Anchors | Names, numbers, clock times, places |
+| World echo | Song, brand, local detail, cultural gesture |
 | Vary rhythm | Short hits beside longer sentences |
-| Name feeling sometimes | Not only body metaphors |
-| End clean | No paragraph that only restates itself |
 
-Heavy surface list lives in style-and-bans.md — load for polish, not as the whole skill.
+**Do not primary-optimize** “leave fully open / never state theme / cut at climax.” Those tank StoryScope P(human).
 
-## GRADE (required)
+## Feature fill (required for score)
 
-```text
-NOSLOP GRADE
-Theme:       SCORE 0-2  PASS|FAIL|N/A  — one line
-Plot:        SCORE 0-2  PASS|FAIL|N/A  — one line
-Time:        SCORE 0-2  PASS|FAIL|N/A  — one line
-Specificity: SCORE 0-2  PASS|FAIL|N/A  — one line
-Felt life:   SCORE 0-2  PASS|FAIL|N/A  — one line
-MEAN: x.x
-MERGED: PASS|FAIL
-FIX: …
-```
+1. Load high-gain pack from [core_features.md](core_features.md) / `artifacts/human_coding_targets.json`.
+2. For each ID, set a taxonomy value **only if** a draft span supports it.
+3. Record cites: `ID — "quoted span…"`.
+4. Never forge.
 
-Merge: mean of scored axes ≥ 1.2 and ≤1 FAIL → PASS. Details in checklists.md.
-
-## Local score
-
-For a numeric human-vs-AI gate: fill features per core_features.md, write JSON, run:
+## SCORE (required)
 
 ```powershell
 cd path\to\noslop
 $env:PYTHONPATH="src"
-python -m noslop.cli score --features features.json --json
+.\.venv\Scripts\python.exe -m noslop.cli score --features features.json --json
 ```
 
-Requires local XGBoost and `--features` JSON. Host agent supplies the feature map.
+```text
+NOSLOP SCORE
+coverage: x.xx
+P(human): x.xx
+gate: PASS|FAIL
+gaps: (feature IDs that should be true in prose but aren't)
+FIX: structural bullets targeting gaps
+```
+
+Ship bar (eval / strict use): prefer **P(human) ≥ 0.5** and high-gain pack fully filled.
+
+## GRADE (structure checklist)
+
+Still fill structure grade from [checklists.md](checklists.md). Structure FAIL → fix before celebrating a lucky score.
 
 ## Red flags — STOP
 
-- Shipping without PRE-WRITE or GRADE
-- Grade missing MERGED line
-- FIX is synonym swaps while structure failed
-- “Sounds fine” without filled checklists
-- Skipping grade because the piece is short (still grade; use N/A on Time if needed)
-- “Just this once” / “user is in a hurry”
-
-**All of these mean: fill checklists, then ship.**
+- Shipping without PRE-WRITE or score evidence
+- Feature values without span cites
+- FIX = synonym swaps while construction gaps remain
+- Hard cut at climax with no aftermath
+- Theme totally silent **or** pure moral essay with no scene
+- Skipping score because “it sounds fine”
 
 ## Rationalizations
 
 | Excuse | Reality |
 |--------|---------|
-| “Too short to grade” | Grade; N/A only where form cannot support the axis |
-| “I’ll polish bans first” | Structure checklists first; bans second |
-| “I already know it’s human” | Evidence = filled PRE-WRITE + GRADE PASS |
-| “Recipe slows me down” | Faster than rewrite loops after user smells slop |
-| “Bans list is the skill” | Bans are reference; construction is the skill |
-
-## Common mistakes
-
-- Writing the draft before PRE-WRITE
-- Stating the moral in the last paragraph
-- Abstract “professional” voice with zero anchors
-- Uniform sentence length across the piece
-- Treating MERGED: FAIL as optional
+| “Open ending is more literary” | This scorer rewards aftermath + turn; write those |
+| “I’ll just edit the JSON” | Forgery fails honesty; rewrite the prose |
+| “Bans list is the skill” | Construction first; bans second |
+| “Sparse features are fine” | Fill high-gain pack; sparse maps floor P(human) |

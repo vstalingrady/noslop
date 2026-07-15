@@ -1,0 +1,36 @@
+{
+  "features": {
+    "PLT_MOR_007": "extended (multiple scenes/time jumps of aftermath/epilogue)",
+    "SIT_MET_303": "4",
+    "REV_SUR_007": "climactic_end_twist",
+    "EVT_SCH_010": [
+      "frame_confession/memoir",
+      "investigation/mystery"
+    ],
+    "AGENT_EMO_009": "embodied_sensations_and_metaphors",
+    "SIT_MET_008": "Primarily implicit echoes (genres, archetypes, unnamed myths)",
+    "TMP_DUR_008": "4_exact_calendar_dates_and_clock_times",
+    "PER_POV_001": "first_person",
+    "PLT_THM_004": [
+      "class/economics",
+      "technology/science"
+    ],
+    "AGENT_ATTR_001": "in-action event (we see them doing something significant)",
+    "PLT_THM_006": "investigation/mystery",
+    "TMP_DUR_011": "past",
+    "SIT_MET_104": "address_to_diegetic_listener_only",
+    "SIT_GEN_001": "nonfictional_mode_pastiche_or_essayistic",
+    "SIT_MET_501": "yes",
+    "PLT_MOR_001": "implicit_moral_inferred_from_outcomes_and_tone",
+    "REV_DIS_002": "mix_of_small_and_large_reveals",
+    "AGENT_ROLE_001": "active protagonist driving the main plot",
+    "EVT_CAU_001": "mixed_explicit_and_implicit",
+    "SET_ATM_005": "2_sparse",
+    "TMP_ORD_014": "ends_with_brief_forward_epilogue_or_flashforward",
+    "PLT_THM_005": "partially_resolved (some progress but key tensions remain)",
+    "SIT_MET_002": "no direct address"
+  },
+  "brief": "cold_email",
+  "arm": "noslop",
+  "honesty": "values must match draft prose; see cites"
+}

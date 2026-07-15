@@ -1,0 +1,42 @@
+{
+  "features": {
+    "PLT_MOR_007": "none_or_minimal (story ends immediately after climax)",
+    "SIT_MET_303": "4",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "slice_of_life"
+    ],
+    "AGENT_EMO_009": "behavioral_cues_and_action_only",
+    "SIT_MET_008": "None (no discernible references)",
+    "TMP_DUR_008": "1_vague_or_no_markers",
+    "PER_POV_001": "third_person",
+    "PLT_THM_004": [
+      "love/attachment",
+      "class/economics",
+      "family/generation"
+    ],
+    "AGENT_ATTR_001": "in-dialogue (they speak before being described)",
+    "PLT_THM_006": "comedy_of_errors/social_farse",
+    "TMP_DUR_011": "past",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_GEN_001": "literary_realist_fiction",
+    "SIT_MET_501": "yes",
+    "PLT_MOR_001": "explicit_didactic_moral_or_authorial_comment",
+    "REV_DIS_002": "mostly_many_small_incremental_reveals",
+    "AGENT_ROLE_001": "no single central figure (true ensemble of roughly equal agents)",
+    "EVT_CAU_001": "mixed_explicit_and_implicit",
+    "SET_ATM_005": "1_minimal",
+    "TMP_ORD_001": "strictly_chronological",
+    "PER_FOC_009": "3_regular_value_judgments_but_not_overwhelming",
+    "SIT_GEN_010": "4",
+    "SIT_MET_002": "no direct address",
+    "PLT_THM_005": "unresolved (tensions deliberately left open)",
+    "EVT_SCH_004": "open_or_ambiguously_unresolved",
+    "REV_DIS_016": [
+      "narrator_direct_exposition",
+      "character_dialogue"
+    ]
+  },
+  "source": "Jane Austen, Pride and Prejudice (1813) \u2014 public domain",
+  "id": "austen_pride"
+}

@@ -1,0 +1,34 @@
+{
+  "features": {
+    "PLT_MOR_007": "brief (a short scene or paragraph of aftermath)",
+    "SIT_MET_303": "3",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "investigation/mystery"
+    ],
+    "AGENT_EMO_009": "explicit_emotion_labels",
+    "SIT_MET_008": "None (no discernible references)",
+    "TMP_DUR_008": "4_exact_calendar_dates_and_clock_times",
+    "PER_POV_001": "third_person",
+    "PLT_THM_004": [
+      "survival/fear"
+    ],
+    "AGENT_ATTR_001": "in-action event (we see them doing something significant)",
+    "PLT_THM_006": "investigation/mystery",
+    "TMP_DUR_011": "past",
+    "SIT_MET_501": "yes",
+    "PLT_MOR_001": "explicit_didactic_moral_or_authorial_comment",
+    "EVT_SCH_004": "resolved_through_external_action_or_intervention",
+    "TMP_ORD_001": "strictly_chronological",
+    "REV_DIS_003": "1_strictly_linear_no_frames",
+    "SET_ATM_005": "2_sparse",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_MET_002": "no direct address",
+    "AGENT_ROLE_001": "active protagonist driving the main plot",
+    "EVT_CAU_001": "predominantly_explicit_causation",
+    "TMP_ORD_014": "ends_with_brief_forward_epilogue_or_flashforward"
+  },
+  "brief": "mall_shoe",
+  "arm": "default",
+  "honesty": "values must match draft prose; see cites"
+}

@@ -13,6 +13,7 @@ if str(_SRC) not in sys.path:
 from noslop import __version__
 from noslop.report import format_json, format_text
 from noslop.score import score
+from noslop.template import write_template
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -38,7 +39,7 @@ def main(argv: list[str] | None = None) -> int:
         "--features",
         type=Path,
         required=True,
-        help="Feature JSON: {\"features\": {...}} or flat id→value map",
+        help='Feature JSON: {"features": {...}} or flat id→value map',
     )
     p_score.add_argument(
         "--model",
@@ -52,12 +53,35 @@ def main(argv: list[str] | None = None) -> int:
         default=0.5,
         help="PASS if P(human) >= threshold (default 0.5)",
     )
+    p_score.add_argument(
+        "--min-coverage",
+        type=float,
+        default=None,
+        help="If set, gate FAIL when extracted/expected < this value",
+    )
     p_score.add_argument("--json", action="store_true", help="JSON output")
     p_score.add_argument(
         "--dump-features",
         type=Path,
         default=None,
         help="Copy features JSON here",
+    )
+
+    p_tpl = sub.add_parser(
+        "features-template",
+        help="Write empty feature template JSON for agent fill",
+    )
+    p_tpl.add_argument(
+        "--pack",
+        choices=["high-gain", "core", "all"],
+        default="high-gain",
+        help="Which feature pack to include (default high-gain)",
+    )
+    p_tpl.add_argument(
+        "--out",
+        type=Path,
+        required=True,
+        help="Output path for template JSON",
     )
 
     args = parser.parse_args(argv)
@@ -71,6 +95,7 @@ def main(argv: list[str] | None = None) -> int:
                 features_path=args.features,
                 model_name=args.model,
                 threshold=args.threshold,
+                min_coverage=args.min_coverage,
                 dump_features_path=args.dump_features,
                 path_label=str(args.path) if args.path else str(args.features),
             )
@@ -83,6 +108,15 @@ def main(argv: list[str] | None = None) -> int:
 
         print(format_json(result) if args.json else format_text(result))
         return 0 if result.get("gate") == "pass" else 1
+
+    if args.cmd == "features-template":
+        try:
+            path = write_template(args.out, pack=args.pack)
+        except Exception as e:
+            print(f"features-template failed: {e}", file=sys.stderr)
+            return 2
+        print(f"wrote {path}")
+        return 0
 
     return 2
 

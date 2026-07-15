@@ -1,0 +1,34 @@
+{
+  "briefs": [
+    {
+      "id": "mall_shoe",
+      "genre": "fiction",
+      "words": "400-600",
+      "prompt": "A night-shift security guard at a nearly empty mall finds a child's shoe in the food court after closing and must decide what to do."
+    },
+    {
+      "id": "cold_email",
+      "genre": "email",
+      "words": "150-250",
+      "prompt": "Cold email from a freelance data analyst to a clinic operations manager offering to fix their no-show rate dashboard. Specific, not salesy spam."
+    },
+    {
+      "id": "personal_bio",
+      "genre": "bio",
+      "words": "120-200",
+      "prompt": "Personal bio for a 29-year-old backend engineer in Jakarta who left FAANG-style burnout for a logistics startup and still plays badminton on Sundays."
+    },
+    {
+      "id": "saas_blurb",
+      "genre": "marketing",
+      "words": "100-180",
+      "prompt": "Landing-page paragraph for a tool that turns messy CSV exports into clean monthly finance packs for small shops."
+    },
+    {
+      "id": "agent_answer",
+      "genre": "technical",
+      "words": "250-400",
+      "prompt": "Explain how to debug a flaky Playwright test that fails only in CI when waiting for a toast notification, as if answering a junior engineer."
+    }
+  ]
+}

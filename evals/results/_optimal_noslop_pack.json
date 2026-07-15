@@ -1,0 +1,30 @@
+{
+  "PLT_MOR_007": "extended (multiple scenes/time jumps of aftermath/epilogue)",
+  "SIT_MET_303": "4",
+  "REV_SUR_007": "climactic_end_twist",
+  "EVT_SCH_010": [
+    "frame_confession/memoir"
+  ],
+  "AGENT_EMO_009": "embodied_sensations_and_metaphors",
+  "SIT_MET_008": "Balanced mix of explicit and implicit",
+  "TMP_DUR_008": "4_exact_calendar_dates_and_clock_times",
+  "PER_POV_001": "first_person",
+  "PLT_THM_004": [
+    "survival/fear",
+    "guilt/redemption"
+  ],
+  "AGENT_ATTR_001": "in-action event (we see them doing something significant)",
+  "PLT_THM_006": "coming_of_age/initiation",
+  "TMP_DUR_011": "past",
+  "SIT_MET_104": "generic_second_person_as_generalization",
+  "REV_SUS_002": "implicit_omission_only",
+  "EVT_SCH_004": "catastrophic_or_irrevocably_negative_outcome",
+  "REV_DIS_016": "environmental_or_scenic_clues",
+  "REV_DIS_002": "mix_of_small_and_large_reveals",
+  "SIT_GEN_001": "realist_contemporary",
+  "AGENT_ROLE_001": "active protagonist driving the main plot",
+  "PLT_THM_005": "reframed/transcended (tension transformed into new understanding)",
+  "EVT_CAU_001": "mixed_explicit_and_implicit",
+  "TMP_ORD_001": "chronological_spine_with_frequent_flashbacks",
+  "TMP_ORD_010": "3"
+}

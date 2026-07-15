@@ -1,67 +1,63 @@
 # noslop
 
-Structure-first writing skill for agents, plus a local XGBoost scorer for narrative human-vs-AI features.
-
-Design draws on [StoryScope](https://arxiv.org/abs/2604.03136) (discourse construction over surface style).
+Prompt-engineering skill + local StoryScope XGBoost scorer so **AI drafts can score human** on discourse construction features (arXiv:2604.03136).
 
 ## Skill
 
 ```
 skills/noslop/
-  SKILL.md           # recipe + iron law
-  checklists.md      # PRE-WRITE + GRADE templates
-  style-and-bans.md  # surface reference
-  core_features.md   # feature IDs for local score
+  SKILL.md           # PRE-WRITE → human-coding draft → features → score → FIX
+  human_coding.md    # must-hit constructions (aftermath, twist, embodied, …)
+  checklists.md      # templates + cite rules
+  core_features.md   # lean feature pack
+  style-and-bans.md  # surface polish after score loop
 ```
 
 Install:
 
-```
-copy skills\noslop\*  %USERPROFILE%\.claude\skills\noslop\
+```powershell
+Copy-Item -Force skills\noslop\* $env:USERPROFILE\.claude\skills\noslop\
 ```
 
-Flow: fill PRE-WRITE → draft → fill GRADE → fix until PASS → ship.
+Flow:
+
+1. Fill PRE-WRITE (aftermath, end turn, embodied beat, frame, theme surface)
+2. Draft so those are **true on the page**
+3. Fill lean `features.json` (must-hit + support) with span cites — never forge
+4. Score → if P(human) low, structural FIX (max 2 rounds)
+5. Optional surface ban polish last
 
 ## Local score
 
-Runtime: `numpy`, `xgboost`.
-
 ```powershell
 cd C:\Users\vstal\noslop
-pip install -r requirements.txt
 $env:PYTHONPATH="src"
-python -m noslop.cli score --features features.json --json
+.\.venv\Scripts\python.exe -m noslop.cli score --features features.json --json
+.\.venv\Scripts\python.exe -m noslop.cli score --features features.json --min-coverage 0.05
+.\.venv\Scripts\python.exe -m noslop.cli features-template --pack high-gain --out features_template.json
 ```
 
-Pass a feature map JSON (see `core_features.md`). The CLI scores offline with the bundled model.
+**Lean pack note:** must-hit constructions (~12–23 IDs) beat bloated mid-value fills. See `evals/results/SUMMARY.md`.
 
-### Retrain
-
-Place StoryScope `storyscope_features.parquet` in `artifacts/`, then:
+## Eval A/B
 
 ```powershell
-pip install pyarrow
-python -m noslop.tools.build_encoder
-python -m noslop.tools.train_binary --subset narrative
+$env:PYTHONPATH="src"
+.\.venv\Scripts\python.exe evals\run_score_ab.py
 ```
 
-## artifacts/
+Writes per-brief default vs noslop scores into `evals/results/SUMMARY.md`.
 
-Offline scorer data (skill does not load these):
+## artifacts/
 
 | Path | Role |
 |------|------|
 | `taxonomy.json` | Feature definitions |
 | `encoder_state.json` | Feature → model columns |
 | `models/noslop_binary_narrative.json` | Trained detector |
+| `human_coding_targets.json` | Must-hit / support / high-gain pack |
 
-## Layout
-
-```
-skills/noslop/   agent skill
-src/noslop/      local score CLI
-artifacts/       taxonomy, encoder, model
-```
+Model weights are **not** retrained for the skill loop.
 
 ## License
 

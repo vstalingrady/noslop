@@ -23,6 +23,7 @@ def score(
     features_path: str | Path | None = None,
     model_name: str = "narrative",
     threshold: float = 0.5,
+    min_coverage: float | None = None,
     dump_features_path: str | Path | None = None,
     path_label: str | None = None,
 ) -> dict[str, Any]:
@@ -62,21 +63,33 @@ def score(
     pred = predict_binary(clf, X)
 
     p_human = pred["p_human"]
-    gate = "pass" if p_human >= threshold else "fail"
     extracted = sum(
         1 for fid in feature_ids if fid in features and features[fid] not in (None, "")
     )
+    expected = len(feature_ids)
+    coverage = (extracted / expected) if expected else 0.0
+
+    warnings: list[str] = []
+    if coverage < 0.8:
+        warnings.append("sparse_features; score may be floor-biased")
+
+    gate = "pass" if p_human >= threshold else "fail"
+    if min_coverage is not None and coverage < min_coverage:
+        gate = "fail"
+        warnings.append(f"coverage {coverage:.2f} < min_coverage {min_coverage}")
 
     return {
         **pred,
         "gate": gate,
         "threshold": threshold,
+        "min_coverage": min_coverage,
+        "coverage": coverage,
         "model_name": f"binary_{model_name}",
         "model_path": str(model_path),
         "features_extracted": extracted,
-        "features_expected": len(feature_ids),
+        "features_expected": expected,
         "extractor_model": None,
-        "warning": None,
+        "warning": "; ".join(warnings) if warnings else None,
         "paper": "arXiv:2604.03136",
         "path": path_label or (str(features_path) if features_path else None),
     }

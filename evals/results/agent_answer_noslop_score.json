@@ -1,0 +1,19 @@
+{
+  "label": "human",
+  "p_human": 0.5405383110046387,
+  "p_ai": 0.45946168899536133,
+  "n_features": 761,
+  "model_n_features": 761,
+  "gate": "pass",
+  "threshold": 0.5,
+  "min_coverage": null,
+  "coverage": 0.08679245283018867,
+  "model_name": "binary_narrative",
+  "model_path": "C:\\Users\\vstal\\noslop\\artifacts\\models\\noslop_binary_narrative.json",
+  "features_extracted": 23,
+  "features_expected": 265,
+  "extractor_model": null,
+  "warning": "sparse_features; score may be floor-biased",
+  "paper": "arXiv:2604.03136",
+  "path": "C:\\Users\\vstal\\noslop\\evals\\results\\agent_answer_noslop_features.json"
+}

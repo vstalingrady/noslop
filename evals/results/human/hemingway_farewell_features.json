@@ -1,0 +1,45 @@
+{
+  "features": {
+    "PLT_MOR_007": "none_or_minimal (story ends immediately after climax)",
+    "SIT_MET_303": "1",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "slice_of_life",
+      "siege/ordeal"
+    ],
+    "AGENT_EMO_009": "behavioral_cues_and_action_only",
+    "SIT_MET_008": "None (no discernible references)",
+    "TMP_DUR_008": "2_seasonal_or_general_period_markers",
+    "PER_POV_001": "first_person",
+    "PLT_THM_004": [
+      "survival/fear",
+      "nature/environment",
+      "violence/trauma"
+    ],
+    "AGENT_ATTR_001": "in-action event (we see them doing something significant)",
+    "PLT_THM_006": "slice_of_life/vignette",
+    "TMP_DUR_011": "past",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_GEN_001": "historical_realist",
+    "SIT_MET_501": "no",
+    "PLT_MOR_001": "no_discernible_moral_or_thematic_judgment",
+    "REV_DIS_002": "mostly_many_small_incremental_reveals",
+    "AGENT_ROLE_001": "observer/witness whose main role is to watch and report on others",
+    "EVT_CAU_001": "predominantly_implicit_or_inferred",
+    "SET_ATM_005": "4_rich",
+    "TMP_ORD_001": "strictly_chronological",
+    "REV_DIS_003": "1_strictly_linear_no_frames",
+    "SIT_MET_002": "no direct address",
+    "PLT_THM_005": "unresolved (tensions deliberately left open)",
+    "EVT_SCH_004": "open_or_ambiguously_unresolved",
+    "PER_FOC_009": "1_none_or_very_subtle_value_judgments",
+    "SIT_GEN_010": "2",
+    "SET_ATM_020": [
+      "weather_and_light",
+      "nature_and_landscape",
+      "architecture_and_objects"
+    ]
+  },
+  "source": "Ernest Hemingway, A Farewell to Arms (1929) \u2014 public domain in US (pub pre-1930)",
+  "id": "hemingway_farewell"
+}

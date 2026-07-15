@@ -1,0 +1,45 @@
+{
+  "features": {
+    "PLT_MOR_007": "none_or_minimal (story ends immediately after climax)",
+    "SIT_MET_303": "2",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "quest/journey",
+      "siege/ordeal"
+    ],
+    "AGENT_EMO_009": "embodied_sensations_and_metaphors",
+    "SIT_MET_008": "Primarily implicit echoes (genres, archetypes, unnamed myths)",
+    "TMP_DUR_008": "3_relative_day_and_duration_markers",
+    "PER_POV_001": "third_person",
+    "PLT_THM_004": [
+      "survival/fear",
+      "family/generation",
+      "nature/environment"
+    ],
+    "AGENT_ATTR_001": "in-action event (we see them doing something significant)",
+    "PLT_THM_006": "voyage_and_return",
+    "TMP_DUR_011": "past",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_GEN_001": "literary_realist_fiction",
+    "SIT_MET_501": "no",
+    "PLT_MOR_001": "implicit_moral_inferred_from_outcomes_and_tone",
+    "REV_DIS_002": "mostly_many_small_incremental_reveals",
+    "AGENT_ROLE_001": "active protagonist driving the main plot",
+    "EVT_CAU_001": "predominantly_implicit_or_inferred",
+    "SET_ATM_005": "4_rich",
+    "TMP_ORD_001": "mostly_chronological_with_rare_flashbacks",
+    "PER_FOC_009": "1_none_or_very_subtle_value_judgments",
+    "SIT_GEN_010": "3",
+    "SIT_MET_002": "no direct address",
+    "PLT_THM_005": "unresolved (tensions deliberately left open)",
+    "EVT_SCH_004": "open_or_ambiguously_unresolved",
+    "SET_ATM_020": [
+      "weather_and_light",
+      "nature_and_landscape",
+      "decay_and_dirt"
+    ],
+    "REV_DIS_003": "2_minor_analepses_or_prologue_only"
+  },
+  "source": "Cormac McCarthy, The Road (2006) \u2014 short fair-use excerpt for evaluation only",
+  "id": "mccarthy_road"
+}

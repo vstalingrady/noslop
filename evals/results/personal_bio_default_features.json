@@ -1,0 +1,30 @@
+{
+  "features": {
+    "PLT_MOR_007": "none_or_minimal (story ends immediately after climax)",
+    "SIT_MET_303": "2",
+    "REV_SUR_007": "no_twist",
+    "EVT_SCH_010": [
+      "slice_of_life"
+    ],
+    "AGENT_EMO_009": "explicit_emotion_labels",
+    "SIT_MET_008": "None (no discernible references)",
+    "TMP_DUR_008": "1_vague_or_no_markers",
+    "PER_POV_001": "first_person",
+    "PLT_THM_004": [
+      "identity/selfhood"
+    ],
+    "AGENT_ATTR_001": "external description (appearance/background summary)",
+    "PLT_THM_006": "rags_to_riches_or_education",
+    "TMP_DUR_011": "present",
+    "SIT_MET_501": "yes",
+    "PLT_MOR_001": "explicit_didactic_moral_or_authorial_comment",
+    "SIT_MET_104": "no_direct_address",
+    "SIT_GEN_001": "nonfictional_mode_pastiche_or_essayistic",
+    "SET_ATM_005": "1_minimal",
+    "SIT_MET_002": "no direct address",
+    "EVT_CAU_001": "predominantly_explicit_causation"
+  },
+  "brief": "personal_bio",
+  "arm": "default",
+  "honesty": "values must match draft prose; see cites"
+}
