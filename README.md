@@ -27,6 +27,22 @@ Optional local tools to score drafts.</p>
 
 ---
 
+## Modes
+
+Writing intensity is a choice. **Default ship = balanced.** High scores with stiff prose lose.
+
+| Mode | Point |
+|------|--------|
+| **modest** | Natural flow; light skill; digression OK |
+| **balanced** | **Ship default** — readable, anti-glue/sermon, not score-farm |
+| **max** | Research only — full craft pressure; readability cost |
+| *default* (evals) | Control arm: raw model slop |
+
+PRE-WRITE includes `Mode: modest | balanced | max`. Details: [`skills/noslop/modes.md`](skills/noslop/modes.md).  
+Comparison report: [`evals/results/noslop_modes_comparison.docx`](evals/results/noslop_modes_comparison.docx) · scores [`evals/results/modes/SUMMARY.md`](evals/results/modes/SUMMARY.md)
+
+---
+
 ## See the difference
 
 Same prompt. **default** = typical model goo. **noslop** = skill applied.  

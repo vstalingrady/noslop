@@ -1,0 +1,16 @@
+{
+  "brief": "cold_email",
+  "mode": "modest",
+  "score": 10.0,
+  "gate": "pass",
+  "hard_fail": false,
+  "hard_reasons": [],
+  "axes": {
+    "anchors": 2,
+    "uneven": 2,
+    "moral_close": 2,
+    "rhythm": 2,
+    "glue_bans": 2
+  },
+  "path": "evals/results/modes/cold_email_modest.md"
+}

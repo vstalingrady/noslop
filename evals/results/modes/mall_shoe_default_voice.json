@@ -1,0 +1,19 @@
+{
+  "brief": "mall_shoe",
+  "mode": "default",
+  "score": 0.88,
+  "gate": "fail",
+  "hard_fail": true,
+  "hard_reasons": [
+    "moral_close_sermon",
+    "glue_ban_heavy"
+  ],
+  "axes": {
+    "anchors": 0,
+    "uneven": 0,
+    "moral_close": 0,
+    "rhythm": 1,
+    "glue_bans": 0
+  },
+  "path": "evals/results/modes/mall_shoe_default.md"
+}

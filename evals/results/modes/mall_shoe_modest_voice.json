@@ -1,0 +1,16 @@
+{
+  "brief": "mall_shoe",
+  "mode": "modest",
+  "score": 8.07,
+  "gate": "pass",
+  "hard_fail": false,
+  "hard_reasons": [],
+  "axes": {
+    "anchors": 1,
+    "uneven": 1,
+    "moral_close": 2,
+    "rhythm": 2,
+    "glue_bans": 2
+  },
+  "path": "evals/results/modes/mall_shoe_modest.md"
+}

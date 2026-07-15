@@ -1,0 +1,16 @@
+{
+  "brief": "mall_shoe",
+  "mode": "balanced",
+  "score": 8.25,
+  "gate": "pass",
+  "hard_fail": false,
+  "hard_reasons": [],
+  "axes": {
+    "anchors": 2,
+    "uneven": 1,
+    "moral_close": 2,
+    "rhythm": 1,
+    "glue_bans": 2
+  },
+  "path": "evals/results/modes/mall_shoe_balanced.md"
+}

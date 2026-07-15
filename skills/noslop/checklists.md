@@ -6,6 +6,7 @@ Ship needs PRE-WRITE + VOICE PASS. StoryScope optional.
 
 ```text
 NOSLOP PRE-WRITE
+Mode: modest | balanced | max
 Audience:
 Length / form:
 Anchors (name / number / place / time):
@@ -18,9 +19,11 @@ Surface risk for this genre:
 
 Rules:
 
+- Mode default = **balanced** if omitted. **max** = research only.
 - Anchors concrete, not “something specific later.”
 - Mess/incomplete: skip only if form is one-line; write `N/A — too short`.
-- “What I will NOT force” must name at least one skipped arc toy.
+- “What I will NOT force” must name at least one skipped arc toy (especially balanced/modest).
+- See [modes.md](modes.md).
 
 ## VOICE grade
 

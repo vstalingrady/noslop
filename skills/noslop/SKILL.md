@@ -8,15 +8,17 @@ description: >-
 
 # noslop
 
-Write so a careful reader doesn’t bounce. Construction + mess first. Bans second.
+Write so a careful reader doesn’t bounce. **Human flow first.** Construction + mess; bans second. Do not max scores until the page is stiff.
 
-StoryScope / XGBoost is **optional diagnostic only**. High P(human) is not “sounds like a book” — books mean ~0.13 on that scorer; see `evals/results/HUMAN_BASELINE.md`.
+**Modes:** see [modes.md](modes.md). Default ship intensity = **balanced**. **max** is research only. High scores with unreadable craft = failure.
+
+StoryScope / XGBoost is **optional diagnostic only**. Books mean ~0.13 P(human) on that scorer — a “low” StoryScope band can still be good writing.
 
 **Violating the letter of these rules is violating the spirit of the rules.**
 
 ```
-NO SHIP WITHOUT: PRE-WRITE + draft + NOSLOP VOICE (MERGED: PASS)
-StoryScope score is NOT required for ship.
+NO SHIP WITHOUT: PRE-WRITE (incl. Mode) + draft + NOSLOP VOICE (no hard_fail)
+Default Mode = balanced. Do not require VOICE 9+ or StoryScope P(human) ≥ 0.5.
 ```
 
 ## When to use
@@ -41,13 +43,14 @@ StoryScope score is NOT required for ship.
 7. Ship with VOICE evidence
 ```
 
-Refs: [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
+Refs: [modes.md](modes.md) · [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
 Optional StoryScope: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
 
 ## PRE-WRITE (required)
 
 ```text
 NOSLOP PRE-WRITE
+Mode: modest | balanced | max
 Audience:
 Length / form:
 Anchors (name / number / place / time):
@@ -58,18 +61,24 @@ Where short hits land:
 Surface risk for this genre:
 ```
 
-## Draft recipe (VOICE-first)
+If Mode omitted → **balanced**.
+
+## Draft recipe (by mode)
+
+Follow [modes.md](modes.md). For **balanced** (default):
 
 | Do | How it shows |
 |----|----------------|
-| Anchors | real names, times, places, numbers |
-| Uneven | one skip, digression, or dead-end detail |
+| Flow first | A person would finish the page without fatigue |
+| Anchors | real names/times/places when they help — not a stampede |
+| Uneven | one skip or digression if natural |
 | No thesis close | end on image/action/cutoff |
-| Rhythm | short next to long |
-| Feeling | body or behavior — not only “sad” |
-| Optional frame/twist | only if natural — not a checklist dump |
+| Clean surface | no glue/ban spam |
 
-**Do not primary-optimize** StoryScope must-hit stack (extended aftermath + theme-4 + climactic twist + memoir frame every time). That games the old scorer and still smells model-made.
+**modest:** lighter still — digression OK, fewer checklist beats.  
+**max:** full craft pressure (research); label it; expect readability cost.
+
+**Do not** primary-optimize StoryScope must-hit stacks or VOICE 9+ as the win condition.
 
 ## VOICE grade (required)
 
@@ -94,7 +103,8 @@ $env:PYTHONPATH="src"
 .\.venv\Scripts\python.exe -m noslop.cli voice --text-file draft.md --json
 ```
 
-Ship bar: **score ≥ 6.5** and no hard_fail.
+Ship bar (**balanced**): no hard_fail; prefer score ≥ ~5.5–7. Do **not** require 9+.  
+**modest:** soft; prioritize flow. **max:** research; high score OK only if labeled.
 
 ## StoryScope mode (optional)
 

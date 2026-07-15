@@ -1,0 +1,19 @@
+{
+  "brief": "cold_email",
+  "mode": "default",
+  "score": 4.91,
+  "gate": "fail",
+  "hard_fail": true,
+  "hard_reasons": [
+    "ban_spam",
+    "glue_ban_heavy"
+  ],
+  "axes": {
+    "anchors": 0,
+    "uneven": 1,
+    "moral_close": 2,
+    "rhythm": 2,
+    "glue_bans": 0
+  },
+  "path": "evals/results/modes/cold_email_default.md"
+}

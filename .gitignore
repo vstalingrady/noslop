@@ -21,3 +21,6 @@ artifacts/models/multiclass_*.json
 
 tmp_score/
 
+
+node_modules/
+

@@ -1,0 +1,1 @@
+The mall went quiet. A security guard found a child's shoe and had to decide what to do. It's important to note that these situations can be complex. He leveraged training protocols to unlock the best outcome. At the end of the day, what matters is caring first. I used to think the job was about rules. Turns out it was about heart.
