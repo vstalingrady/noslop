@@ -61,7 +61,6 @@ Offline scorer data (skill does not load these):
 skills/noslop/   agent skill
 src/noslop/      local score CLI
 artifacts/       taxonomy, encoder, model
-tests/           encode/score tests
 ```
 
 ## License
