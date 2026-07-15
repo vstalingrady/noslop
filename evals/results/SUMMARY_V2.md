@@ -1,4 +1,4 @@
-# noslop v2 VOICE A/B SUMMARY
+# noslop VOICE A/B SUMMARY
 
 Primary gate: `python -m noslop.cli voice` (threshold 6.5, no hard_fail).
 StoryScope P(human) is **not** the ship gate. Books mean ~0.13 — see HUMAN_BASELINE.md.
@@ -6,8 +6,8 @@ GPTZero: not run in this environment (optional; no undetectable claim).
 
 ## Per-brief
 
-| Brief | default | noslop-v2 | delta | noslop>=6.5? | delta>=1.5? |
-|-------|---------|-----------|-------|--------------|-------------|
+| Brief | default | noslop | delta | noslop>=6.5? | delta>=1.5? |
+|-------|---------|--------|-------|--------------|-------------|
 | mall_shoe | 0.88 (fail) | 9.12 (pass) | +8.24 | YES | YES |
 | cold_email | 4.91 (fail) | 9.12 (pass) | +4.21 | YES | YES |
 | personal_bio | 3.16 (fail) | 9.12 (pass) | +5.96 | YES | YES |

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Plot default vs noslop VOICE scores + excerpt sheet.
+Plot default vs noslop VOICE scores (charts only — no text excerpts).
 
   $env:PYTHONPATH="src"
   .\.venv\Scripts\python.exe evals\plot_compare.py
@@ -9,7 +9,6 @@ Plot default vs noslop VOICE scores + excerpt sheet.
 from __future__ import annotations
 
 import json
-import textwrap
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -40,17 +39,6 @@ def load_voice(brief: str, arm: str) -> dict:
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-def load_text(brief: str, arm: str, max_chars: int = 420) -> str:
-    p = V2 / f"{brief}_{arm}.md"
-    t = p.read_text(encoding="utf-8").strip()
-    t = "\n".join(
-        ln for ln in t.splitlines() if not ln.strip().startswith("#")
-    ).strip()
-    if len(t) > max_chars:
-        t = t[: max_chars - 1].rstrip() + "…"
-    return t
-
-
 def load_human_phuman() -> list[tuple[str, float]]:
     rows = []
     for p in sorted(HUMAN.glob("*_score.json")):
@@ -61,7 +49,6 @@ def load_human_phuman() -> list[tuple[str, float]]:
 
 
 def load_storyscope_ab() -> list[tuple[str, float, float]] | None:
-    """Optional StoryScope P(human) from v1 score jsons if present."""
     base = ROOT / "evals" / "results"
     out = []
     for brief in BRIEFS:
@@ -103,7 +90,7 @@ def plot_voice_bars(path: Path) -> None:
 
     fig, ax = plt.subplots(figsize=(10, 5.2))
     b1 = ax.bar(x - w / 2, defaults, w, label="default", color="#6b7280", edgecolor="#9ca3af")
-    b2 = ax.bar(x + w / 2, noslops, w, label="noslop v2", color="#3b82f6", edgecolor="#93c5fd")
+    b2 = ax.bar(x + w / 2, noslops, w, label="noslop", color="#3b82f6", edgecolor="#93c5fd")
     ax.axhline(6.5, color="#f59e0b", linestyle="--", linewidth=1.2, label="PASS 6.5")
     ax.set_ylabel("VOICE score (0–10)")
     ax.set_title("default vs noslop — VOICE scores by brief")
@@ -132,11 +119,10 @@ def plot_voice_bars(path: Path) -> None:
 
 def plot_axis_heatmap(path: Path) -> None:
     axes_names = ["anchors", "uneven", "moral_close", "rhythm", "glue_bans"]
-    # rows: brief/arm
     row_labels = []
     mat = []
     for b in BRIEFS:
-        for arm, tag in (("default", "def"), ("noslop", "ns")):
+        for arm, tag in (("default", "default"), ("noslop", "noslop")):
             r = load_voice(b, arm)
             row_labels.append(f"{LABELS[b]} · {tag}")
             mat.append([r["axes"][a] for a in axes_names])
@@ -151,7 +137,9 @@ def plot_axis_heatmap(path: Path) -> None:
     ax.set_title("VOICE axes (0–2) — default vs noslop")
     for i in range(mat.shape[0]):
         for j in range(mat.shape[1]):
-            ax.text(j, i, f"{mat[i, j]:.0f}", ha="center", va="center", color="#0f172a", fontsize=8)
+            ax.text(
+                j, i, f"{mat[i, j]:.0f}", ha="center", va="center", color="#0f172a", fontsize=8
+            )
     fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02, label="axis score")
     fig.tight_layout()
     fig.savefig(path, dpi=160)
@@ -189,7 +177,6 @@ def plot_human_baseline(path: Path) -> None:
     humans = load_human_phuman()
     if not humans:
         return
-    # mean noslop / default StoryScope if available
     ab = load_storyscope_ab()
     names = [h[0] for h in humans]
     vals = [h[1] for h in humans]
@@ -199,8 +186,12 @@ def plot_human_baseline(path: Path) -> None:
     if ab:
         mean_d = float(np.mean([a[1] for a in ab]))
         mean_n = float(np.mean([a[2] for a in ab]))
-        ax.axvline(mean_d, color="#6b7280", linestyle=":", linewidth=1.5, label=f"mean default AI {mean_d:.2f}")
-        ax.axvline(mean_n, color="#3b82f6", linestyle="--", linewidth=1.5, label=f"mean noslop (StoryScope) {mean_n:.2f}")
+        ax.axvline(
+            mean_d, color="#6b7280", linestyle=":", linewidth=1.5, label=f"mean default AI {mean_d:.2f}"
+        )
+        ax.axvline(
+            mean_n, color="#3b82f6", linestyle="--", linewidth=1.5, label=f"mean noslop {mean_n:.2f}"
+        )
     ax.set_yticks(y)
     ax.set_yticklabels(names)
     ax.set_xlabel("StoryScope P(human)")
@@ -212,51 +203,6 @@ def plot_human_baseline(path: Path) -> None:
     ax.text(0.01, -0.18, note, transform=ax.transAxes, fontsize=8, color="#9ca3af")
     fig.tight_layout()
     fig.savefig(path, dpi=160, bbox_inches="tight")
-    plt.close(fig)
-
-
-def plot_excerpts(path: Path, brief: str = "mall_shoe") -> None:
-    d_txt = load_text(brief, "default", 380)
-    n_txt = load_text(brief, "noslop", 380)
-    d_sc = load_voice(brief, "default")["score"]
-    n_sc = load_voice(brief, "noslop")["score"]
-
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6.2))
-    for ax, title, body, color, sc in (
-        (axes[0], f"default  ·  VOICE {d_sc:.2f}", d_txt, "#6b7280", d_sc),
-        (axes[1], f"noslop v2  ·  VOICE {n_sc:.2f}", n_txt, "#3b82f6", n_sc),
-    ):
-        ax.set_xlim(0, 1)
-        ax.set_ylim(0, 1)
-        ax.axis("off")
-        ax.set_title(title, color=color, pad=10)
-        wrapped = textwrap.fill(body.replace("\n", " ").replace("  ", " "), width=42)
-        ax.text(
-            0.04,
-            0.96,
-            wrapped,
-            va="top",
-            ha="left",
-            fontsize=9.5,
-            family="DejaVu Sans",
-            linespacing=1.35,
-            color="#e5e7eb",
-            wrap=True,
-        )
-        ax.add_patch(
-            plt.Rectangle(
-                (0.02, 0.02),
-                0.96,
-                0.96,
-                fill=False,
-                edgecolor=color,
-                linewidth=1.5,
-                transform=ax.transAxes,
-            )
-        )
-    fig.suptitle(f"Excerpt side-by-side — {LABELS[brief]}", fontsize=13, y=0.98)
-    fig.tight_layout(rect=[0, 0, 1, 0.95])
-    fig.savefig(path, dpi=160)
     plt.close(fig)
 
 
@@ -277,7 +223,7 @@ def plot_storyscope_if_any(path: Path) -> None:
     ax.set_xticklabels(labels, rotation=15, ha="right")
     ax.set_ylabel("P(human)")
     ax.set_ylim(0, 1.0)
-    ax.set_title("StoryScope P(human) — diagnostic only (not v2 ship gate)")
+    ax.set_title("StoryScope P(human) — diagnostic only")
     ax.grid(axis="y")
     ax.legend(frameon=False)
     fig.tight_layout()
@@ -285,65 +231,25 @@ def plot_storyscope_if_any(path: Path) -> None:
     plt.close(fig)
 
 
-def write_gallery_md(paths: dict[str, Path]) -> None:
-    lines = [
-        "# Comparison figures",
-        "",
-        "Generated by `evals/plot_compare.py`. Dark charts for README / evals.",
-        "",
-        "## VOICE (v2 ship gate)",
-        "",
-        f"![VOICE bars]({paths['voice_bars'].name})",
-        "",
-        f"![VOICE deltas]({paths['delta'].name})",
-        "",
-        f"![VOICE axes]({paths['axes'].name})",
-        "",
-        "## Excerpts",
-        "",
-        f"![mall shoe excerpts]({paths['excerpts'].name})",
-        "",
-    ]
-    if paths.get("storyscope"):
-        lines += [
-            "## StoryScope (diagnostic)",
-            "",
-            f"![StoryScope bars]({paths['storyscope'].name})",
-            "",
-            f"![Human books]({paths['human'].name})",
-            "",
-            "Note: books often score **lower** than noslop feature packs on this model.",
-            "",
-        ]
-    (OUT / "README.md").write_text("\n".join(lines), encoding="utf-8")
-
-
 def main() -> int:
     style()
     OUT.mkdir(parents=True, exist_ok=True)
-    paths = {
-        "voice_bars": OUT / "voice_scores_default_vs_noslop.png",
-        "delta": OUT / "voice_delta.png",
-        "axes": OUT / "voice_axes_heatmap.png",
-        "excerpts": OUT / "excerpts_mall_shoe.png",
-    }
-    plot_voice_bars(paths["voice_bars"])
-    plot_delta(paths["delta"])
-    plot_axis_heatmap(paths["axes"])
-    plot_excerpts(paths["excerpts"], "mall_shoe")
 
-    # second excerpt pair if useful
-    plot_excerpts(OUT / "excerpts_cold_email.png", "cold_email")
-    paths["excerpts2"] = OUT / "excerpts_cold_email.png"
+    # drop old excerpt plots if present (excerpts are markdown quotes, not PNGs)
+    for stale in OUT.glob("excerpts_*.png"):
+        stale.unlink()
+
+    plot_voice_bars(OUT / "voice_scores_default_vs_noslop.png")
+    plot_delta(OUT / "voice_delta.png")
+    plot_axis_heatmap(OUT / "voice_axes_heatmap.png")
 
     if load_storyscope_ab():
-        paths["storyscope"] = OUT / "storyscope_default_vs_noslop.png"
-        paths["human"] = OUT / "human_books_baseline.png"
-        plot_storyscope_if_any(paths["storyscope"])
-        plot_human_baseline(paths["human"])
+        plot_storyscope_if_any(OUT / "storyscope_default_vs_noslop.png")
+        plot_human_baseline(OUT / "human_books_baseline.png")
 
-    write_gallery_md(paths)
+    # figures/README.md is hand-maintained (chart embeds + quoted excerpts)
     print("wrote figures to", OUT)
+    print("  (excerpts are markdown quotes in figures/README.md + root README.md)")
     for p in sorted(OUT.glob("*.png")):
         print(" ", p.name, f"({p.stat().st_size // 1024} KB)")
     return 0

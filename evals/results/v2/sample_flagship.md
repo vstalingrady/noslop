@@ -1,8 +1,8 @@
-# Flagship sample (noslop v2)
+# Flagship sample (noslop)
 
 **Brief:** Night-shift guard finds a child's shoe after closing.
 
-**Arm:** noslop-v2 (VOICE primary — anchors, incomplete beat, no thesis close)
+**Arm:** noslop (VOICE — anchors, incomplete beat, no thesis close)
 
 ---
 

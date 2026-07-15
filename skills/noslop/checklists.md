@@ -1,8 +1,8 @@
-# noslop checklists (v2)
+# noslop checklists
 
 Ship needs PRE-WRITE + VOICE PASS. StoryScope optional.
 
-## PRE-WRITE v2
+## PRE-WRITE
 
 ```text
 NOSLOP PRE-WRITE

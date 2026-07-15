@@ -1,7 +1,7 @@
 # StoryScope human-coding (optional / diagnostic)
 
-**v2:** Do **not** use this as the primary ship recipe.  
-Primary ship = [voice.md](voice.md) + PRE-WRITE v2.
+Do **not** use this as the primary ship recipe.  
+Primary ship = [voice.md](voice.md) + PRE-WRITE.
 
 Use only when the user asks for StoryScope / P(human) diagnostics.
 

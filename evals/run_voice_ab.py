@@ -63,7 +63,7 @@ def main() -> int:
 
     n_ok = 0
     lines = [
-        "# noslop v2 VOICE A/B SUMMARY",
+        "# noslop VOICE A/B SUMMARY",
         "",
         "Primary gate: `python -m noslop.cli voice` (threshold 6.5, no hard_fail).",
         "StoryScope P(human) is **not** the ship gate. Books mean ~0.13 — see HUMAN_BASELINE.md.",
@@ -71,8 +71,8 @@ def main() -> int:
         "",
         "## Per-brief",
         "",
-        "| Brief | default | noslop-v2 | delta | noslop>=6.5? | delta>=1.5? |",
-        "|-------|---------|-----------|-------|--------------|-------------|",
+        "| Brief | default | noslop | delta | noslop>=6.5? | delta>=1.5? |",
+        "|-------|---------|--------|-------|--------------|-------------|",
     ]
     for brief in BRIEFS:
         d = by[brief]["default"]

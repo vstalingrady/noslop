@@ -1,6 +1,6 @@
 # Feature IDs (StoryScope diagnostic only)
 
-**v2:** Optional. Ship does **not** require filling these or P(human) ≥ 0.5.
+Optional. Ship does **not** require filling these or P(human) ≥ 0.5.
 
 Primary gate: `python -m noslop.cli voice --text-file draft.md --json`
 

@@ -6,7 +6,7 @@ description: >-
   code cleanup. Primary gate is VOICE (reader anti-slop), not StoryScope P(human).
 ---
 
-# noslop (v2)
+# noslop
 
 Write so a careful reader doesn’t bounce. Construction + mess first. Bans second.
 
@@ -15,7 +15,7 @@ StoryScope / XGBoost is **optional diagnostic only**. High P(human) is not “so
 **Violating the letter of these rules is violating the spirit of the rules.**
 
 ```
-NO SHIP WITHOUT: PRE-WRITE v2 + draft + NOSLOP VOICE (MERGED: PASS)
+NO SHIP WITHOUT: PRE-WRITE + draft + NOSLOP VOICE (MERGED: PASS)
 StoryScope score is NOT required for ship.
 ```
 
@@ -32,7 +32,7 @@ StoryScope score is NOT required for ship.
 ## Core pattern
 
 ```
-1. Fill NOSLOP PRE-WRITE v2
+1. Fill NOSLOP PRE-WRITE
 2. Draft so PRE-WRITE lines show on the page
 3. Fill NOSLOP VOICE grade (or run CLI voice)
 4. FAIL → structural FIX only (max 2 rounds) — not synonym swaps
@@ -44,7 +44,7 @@ StoryScope score is NOT required for ship.
 Refs: [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
 Optional StoryScope: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
 
-## PRE-WRITE v2 (required)
+## PRE-WRITE (required)
 
 ```text
 NOSLOP PRE-WRITE
