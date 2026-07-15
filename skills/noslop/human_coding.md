@@ -9,7 +9,6 @@ Use only when the user asks for StoryScope / P(human) diagnostics.
 
 - Books mean ~**0.13** P(human) on the same scorer (`evals/results/HUMAN_BASELINE.md`)
 - Forced must-hit stack alone ~**0.72** without literary quality
-- GPTZero still flags “human-coding” samples as AI
 
 ## Must-hit constructions (if running diagnostic mode)
 

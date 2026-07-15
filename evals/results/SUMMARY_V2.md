@@ -2,7 +2,6 @@
 
 Primary gate: `python -m noslop.cli voice` (threshold 6.5, no hard_fail).
 StoryScope P(human) is **not** the ship gate. Books mean ~0.13 — see HUMAN_BASELINE.md.
-GPTZero: not run in this environment (optional; no undetectable claim).
 
 ## Per-brief
 

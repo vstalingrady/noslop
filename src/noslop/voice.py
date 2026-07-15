@@ -1,7 +1,7 @@
 """
 VOICE heuristics — reader anti-slop gate (primary for noslop v2).
 
-Does NOT replace StoryScope. Does NOT claim GPTZero evasion.
+Does NOT replace StoryScope.
 Scores text only: anchors, unevenness, moral-close, rhythm, ban/glue.
 """
 

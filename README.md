@@ -5,7 +5,7 @@
 </p>
 
 <p align="center"><b>An agent skill for writing that doesn’t sound like a template LLM.</b><br/>
-Optional local tools to score drafts. Not a “pass GPTZero forever” product.</p>
+Optional local tools to score drafts.</p>
 
 ---
 
@@ -175,8 +175,6 @@ Skill files: [`skills/noslop/`](skills/noslop/) — `SKILL.md`, `voice.md`, `che
 | **StoryScope** | Does a feature map look “human-class” to a research model? | Optional only |
 
 On StoryScope, classic book excerpts average about **0.13** P(human), while gamed feature packs can hit **0.5+**. So a high StoryScope number is **not** “sounds like a novel.” Details: [`evals/results/HUMAN_BASELINE.md`](evals/results/HUMAN_BASELINE.md).
-
-GPTZero and similar tools are another story again. noslop does **not** promise a clean detector report.
 
 ---
 

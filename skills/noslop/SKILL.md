@@ -10,7 +10,7 @@ description: >-
 
 Write so a careful reader doesn’t bounce. Construction + mess first. Bans second.
 
-StoryScope / XGBoost is **optional diagnostic only**. High P(human) is not “sounds like a book” — books mean ~0.13 on that scorer; see `evals/results/HUMAN_BASELINE.md`. GPTZero can still flag AI. Do not claim undetectable.
+StoryScope / XGBoost is **optional diagnostic only**. High P(human) is not “sounds like a book” — books mean ~0.13 on that scorer; see `evals/results/HUMAN_BASELINE.md`.
 
 **Violating the letter of these rules is violating the spirit of the rules.**
 
@@ -113,7 +113,6 @@ Only if user asks for StoryScope / P(human) diagnostic:
 - Thesis closer as last paragraph
 - Zero anchors on long prose
 - Ban/glue spam
-- Claiming GPTZero-proof
 
 ## Rationalizations
 
@@ -122,4 +121,4 @@ Only if user asks for StoryScope / P(human) diagnostic:
 | “StoryScope says PASS” | Optional metric; books score ~0.13 |
 | “Sounds fine to me” | Fill VOICE axes or run CLI |
 | “Bans list is the skill” | Construction + mess first |
-| “I’ll force the full arc pack” | Anti-template; detectors still catch it |
+| “I’ll force the full arc pack” | Anti-template; over-complete craft still smells model-made |

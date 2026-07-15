@@ -1,6 +1,6 @@
 # VOICE (primary ship gate)
 
-Reader anti-slop axes. **Not** StoryScope. **Not** a GPTZero guarantee.
+Reader anti-slop axes. **Not** StoryScope.
 
 ## Axes (0–2 each)
 
@@ -24,7 +24,7 @@ Avoid stacking these as a checklist:
 - “Aftermath isn’t X. It’s Y.”
 - Forced multi-scene aftermath + twist + theme-4 every piece
 
-Those game StoryScope. Detectors and readers still smell the pattern.
+Those game StoryScope and still read as over-complete model craft.
 
 ## Prefer
 
