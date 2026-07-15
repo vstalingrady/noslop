@@ -1,4 +1,4 @@
-"""Local StoryScope XGBoost score from feature JSON only."""
+"""Local StoryScope XGBoost score from feature JSON."""
 
 from __future__ import annotations
 
@@ -26,10 +26,7 @@ def score(
     dump_features_path: str | Path | None = None,
     path_label: str | None = None,
 ) -> dict[str, Any]:
-    """
-    Score with local XGBoost. Requires features (dict or JSON path).
-    No LLM / API extraction.
-    """
+    """Score with local XGBoost. Requires features (dict or JSON path)."""
     tax = Taxonomy.from_json(require_file(TAXONOMY_PATH))
     enc = load_encoder_state(
         require_file(ENCODER_STATE_PATH, "Run: python -m noslop.tools.build_encoder")
@@ -44,8 +41,8 @@ def score(
         features = load_features_json(features_path)
     if features is None:
         raise ValueError(
-            "features or features_path required. "
-            "No live API extract — fill features in-session or pass --features JSON."
+            "features or features_path required "
+            "(JSON map of StoryScope feature ids → values)."
         )
 
     if dump_features_path:

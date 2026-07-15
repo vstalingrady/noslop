@@ -9,7 +9,7 @@ ARTIFACTS = REPO_ROOT / "artifacts"
 MODELS_DIR = ARTIFACTS / "models"
 TAXONOMY_PATH = ARTIFACTS / "taxonomy.json"
 ENCODER_STATE_PATH = ARTIFACTS / "encoder_state.json"
-# Optional local copy of StoryScope feature parquet for retrain
+# StoryScope feature parquet for retrain
 FEATURES_PARQUET = ARTIFACTS / "storyscope_features.parquet"
 
 MODEL_FILES = {

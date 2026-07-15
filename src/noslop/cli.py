@@ -1,4 +1,4 @@
-"""noslop CLI — local XGBoost score from feature JSON only."""
+"""noslop CLI — local XGBoost score from feature JSON."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def main(argv: list[str] | None = None) -> int:
         prog="noslop",
         description=(
             "Local StoryScope XGBoost scorer (arXiv:2604.03136). "
-            "Requires --features JSON. No API extract."
+            "Pass --features JSON."
         ),
     )
     parser.add_argument("--version", action="version", version=f"noslop {__version__}")
@@ -32,7 +32,7 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         nargs="?",
         default=None,
-        help="Optional label path (draft text); not read for extract",
+        help="Label path shown in report (text is not scored)",
     )
     p_score.add_argument(
         "--features",

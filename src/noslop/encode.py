@@ -4,10 +4,8 @@ Feature encoding for StoryScope taxonomy values.
 Paper (arXiv:2604.03136): one-hot categorical, multi-hot multi-select,
 numeric ordinal/scale, binary as 0/1.
 
-Upstream released .json weights were trained with an unpublished column layout
-(954 / 1104 dims). We freeze our layout in encoder_state.json and train
-matching XGBoost weights with the paper's hyperparameters so inference is exact
-for *this* encoding of the *same* 304 features / same data.
+Column layout is frozen in encoder_state.json; bundled XGBoost weights match
+that layout (paper hyperparameters, same 304 features / taxonomy).
 """
 
 from __future__ import annotations

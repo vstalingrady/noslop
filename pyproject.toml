@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "noslop"
 version = "0.1.0"
-description = "Agent skill + StoryScope paper scorer (human vs AI narrative features)"
+description = "Structure-first writing skill and local StoryScope human-vs-AI scorer"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }

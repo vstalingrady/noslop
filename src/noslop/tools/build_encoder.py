@@ -1,5 +1,5 @@
 """
-Build encoder_state.json from StoryScope taxonomy (no parquet required).
+Build encoder_state.json from StoryScope taxonomy.
 
   python -m noslop.tools.build_encoder
 """

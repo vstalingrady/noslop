@@ -1,8 +1,8 @@
-# High-signal StoryScope-ish IDs (host-agent fill)
+# High-signal feature IDs (host-agent fill)
 
-When user wants XGBoost without full 304-dim extract, fill these real taxonomy IDs from the draft, write `features.json`, then:
+Fill these taxonomy IDs from the draft, write `features.json`, then score:
 
-`python -m noslop.cli score draft.md --features features.json`
+`python -m noslop.cli score --features features.json`
 
 | ID | What to judge |
 |----|----------------|

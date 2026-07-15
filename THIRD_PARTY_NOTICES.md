@@ -2,7 +2,7 @@
 
 ## StoryScope
 
-Taxonomy, design, and training data concept from:
+Taxonomy design and research basis:
 
 **StoryScope: Investigating idiosyncrasies in AI fiction**  
 Jenna Russell, Rishanth Rajendhran, Chau Minh Pham, Mohit Iyyer, John Wieting  
@@ -11,6 +11,5 @@ Code: [github.com/jenna-russell/storyscope](https://github.com/jenna-russell/sto
 
 License: MIT — Copyright (c) 2026 Jenna Russell
 
-This repo vendors `artifacts/taxonomy.json` and trains its own XGBoost weights
-(`noslop_binary_*.json`) with paper-like hyperparameters. Re-clone StoryScope
-if you need the full pipeline or feature parquet for retrain.
+noslop includes `artifacts/taxonomy.json` and trained weights under
+`artifacts/models/noslop_binary_*.json` for local scoring.

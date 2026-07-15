@@ -1,4 +1,4 @@
-"""Load StoryScope taxonomy.json (no third-party deps)."""
+"""Load StoryScope taxonomy.json."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Load precomputed feature JSON. No network / no API extract."""
+"""Load feature JSON from disk."""
 
 from __future__ import annotations
 
