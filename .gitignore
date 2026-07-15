@@ -1,0 +1,20 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+.env
+*.log
+outputs/
+cache/
+# large one-time downloads used to build encoder (keep encoder_state.json)
+artifacts/storyscope_features.parquet
+artifacts/raw/
+
+artifacts/models/multiclass_*.json

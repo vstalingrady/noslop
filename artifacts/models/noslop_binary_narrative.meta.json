@@ -1,0 +1,16 @@
+{
+  "subset": "narrative",
+  "n_features": 761,
+  "n_train": 4786,
+  "n_test": 1214,
+  "holdout_acc": 0.957166392092257,
+  "holdout_macro_f1": 0.9167264668636556,
+  "hyperparameters": {
+    "n_estimators": 420,
+    "max_depth": 8,
+    "reg_lambda": 2.0,
+    "human_weight": 5.0
+  },
+  "paper": "arXiv:2604.03136",
+  "encoding": "paper-style: cat one-hot, multi multi-hot, ordinal index, scale numeric, binary 0/1"
+}

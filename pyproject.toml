@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noslop"
+version = "0.1.0"
+description = "Agent skill + StoryScope paper scorer (human vs AI narrative features)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+  "numpy>=1.24",
+  "xgboost>=2.0",
+]
+
+[project.optional-dependencies]
+extract = ["pyyaml>=6.0", "openai>=1.30"]
+encoder = ["pyarrow>=14.0"]
+all = ["pyyaml>=6.0", "openai>=1.30", "pyarrow>=14.0"]
+
+[project.scripts]
+noslop = "noslop.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
