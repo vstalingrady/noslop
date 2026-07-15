@@ -1,43 +1,25 @@
-# Human-coding targets (StoryScope narrative model)
+# StoryScope human-coding (optional / diagnostic)
 
-Write prose so these are **true**, then label them in `features.json` with a cited span.
-Never set a feature the draft does not support.
+**v2:** Do **not** use this as the primary ship recipe.  
+Primary ship = [voice.md](voice.md) + PRE-WRITE v2.
 
-## Must-hit (high lift)
+Use only when the user asks for StoryScope / P(human) diagnostics.
 
-| ID | Prefer value | How it shows in prose |
-|----|--------------|------------------------|
-| `PLT_MOR_007` | extended aftermath | After climax, ≥1 scene or time-jump of consequence |
-| `SIT_MET_303` | `3` or `4` | Theme surfaces in thought/speech — not silent, not pure TED talk |
-| `REV_SUR_007` | climactic end twist | Late turn recontextualizes object/choice |
-| `EVT_SCH_010` | include `frame_confession/memoir` when possible | Log, later recollection, framed telling |
-| `AGENT_EMO_009` | embodied_sensations_and_metaphors | Body + sensation for feeling |
-| `SIT_MET_008` | Balanced mix… or Primarily implicit echoes | One real-world echo (song, brand, local detail) |
+## Why optional
 
-## Strong support
+- Books mean ~**0.13** P(human) on the same scorer (`evals/results/HUMAN_BASELINE.md`)
+- Forced must-hit stack alone ~**0.72** without literary quality
+- GPTZero still flags “human-coding” samples as AI
 
-| ID | Prefer | Prose |
-|----|--------|-------|
-| `TMP_DUR_008` | exact calendar / clock times | `1:14 a.m.`, Tuesday, etc. |
-| `PER_POV_001` | first_person if natural else deep third | Consistent person |
-| `PLT_THM_004` | survival/fear or guilt/redemption | Pressure domain |
-| `AGENT_ATTR_001` | in-action or in-dialogue first | No long resume open |
-| `PLT_THM_006` | coming_of_age/initiation or investigation when fits | Arc shape |
-| `TMP_DUR_011` | past (or present if intentional) | Dominant tense |
+## Must-hit constructions (if running diagnostic mode)
 
-## Avoid (model-low / AI-floor patterns)
+| ID | Prefer | Prose show |
+|----|--------|------------|
+| PLT_MOR_007 | extended aftermath | multi-scene after climax — only if true on page |
+| SIT_MET_303 | 3–4 | theme surfaces in scene, not TED close |
+| REV_SUR_007 | climactic turn | late reframe |
+| EVT_SCH_010 | frame/memoir | only if natural |
+| AGENT_EMO_009 | embodied | body + sensation |
+| SIT_MET_008 | world echoes | song, brand, place |
 
-- Opening with external appearance dump only
-- Zero aftermath (hard cut at climax)
-- Fully open mystery with **no** turn and no consequence scene
-- Emotion only as explicit labels (“he was sad”) with no body
-- Pure open-end + never surface theme (tanks this scorer)
-
-## Nonfiction mapping
-
-| Fiction construction | Nonfiction analog |
-|---------------------|-------------------|
-| Extended aftermath | Consequence paragraph / what changed next week |
-| End twist | Reframe of the opening claim with new evidence |
-| Frame/memoir | “I’m writing this after…”, email postscript, retrospective lead |
-| Embodied | Sensory detail of the room/body while deciding |
+Fill features with span cites. Never forge. Report score as footnote, not ship gate.

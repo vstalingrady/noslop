@@ -14,14 +14,15 @@ from noslop import __version__
 from noslop.report import format_json, format_text
 from noslop.score import score
 from noslop.template import write_template
+from noslop.voice import score_voice
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="noslop",
         description=(
-            "Local StoryScope XGBoost scorer (arXiv:2604.03136). "
-            "Pass --features JSON."
+            "noslop: VOICE anti-slop gate + optional StoryScope scorer. "
+            "Primary ship path is `voice`; `score` is diagnostic."
         ),
     )
     parser.add_argument("--version", action="version", version=f"noslop {__version__}")
@@ -84,6 +85,24 @@ def main(argv: list[str] | None = None) -> int:
         help="Output path for template JSON",
     )
 
+    p_voice = sub.add_parser(
+        "voice",
+        help="Score prose with VOICE anti-slop heuristics (primary gate)",
+    )
+    p_voice.add_argument(
+        "--text-file",
+        type=Path,
+        required=True,
+        help="Path to draft text/markdown",
+    )
+    p_voice.add_argument(
+        "--threshold",
+        type=float,
+        default=6.5,
+        help="PASS if score >= threshold and no hard_fail (default 6.5)",
+    )
+    p_voice.add_argument("--json", action="store_true", help="JSON output")
+
     args = parser.parse_args(argv)
 
     if args.cmd == "score":
@@ -117,6 +136,32 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         print(f"wrote {path}")
         return 0
+
+    if args.cmd == "voice":
+        if not args.text_file.is_file():
+            print(f"Text file not found: {args.text_file}", file=sys.stderr)
+            return 2
+        text = args.text_file.read_text(encoding="utf-8")
+        # strip simple markdown headers for scoring body
+        body = "\n".join(
+            ln for ln in text.splitlines() if not ln.strip().startswith("#")
+        )
+        result = score_voice(body, threshold=args.threshold)
+        result["path"] = str(args.text_file)
+        if args.json:
+            print(format_json(result))
+        else:
+            hf = "yes" if result["hard_fail"] else "no"
+            print(
+                f"noslop voice\n"
+                f"score: {result['score']}\n"
+                f"gate: {result['gate'].upper()}  (threshold {result['threshold']})\n"
+                f"hard_fail: {hf}\n"
+                f"axes: {result['axes']}\n"
+                f"ban_hits: {result['details']['ban_hits']}\n"
+                f"file: {args.text_file}"
+            )
+        return 0 if result.get("gate") == "pass" else 1
 
     return 2
 

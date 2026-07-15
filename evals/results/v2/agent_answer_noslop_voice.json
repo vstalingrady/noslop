@@ -1,0 +1,39 @@
+{
+  "score": 8.25,
+  "gate": "pass",
+  "hard_fail": false,
+  "hard_reasons": [],
+  "axes": {
+    "anchors": 2,
+    "uneven": 1,
+    "moral_close": 2,
+    "rhythm": 1,
+    "glue_bans": 2
+  },
+  "details": {
+    "words": 104,
+    "sentences": 18,
+    "ban_hits": 0,
+    "anchors": {
+      "per_100": 38.46,
+      "digits": 30,
+      "times": 2,
+      "multi_proper": 0,
+      "codes": 10,
+      "total": 40
+    },
+    "moral": {
+      "hits": 0,
+      "tail_bad": false
+    },
+    "rhythm": {
+      "stdev": 3.38,
+      "n": 18,
+      "shorts": 9
+    },
+    "uneven": {
+      "signals": 1
+    }
+  },
+  "threshold": 6.5
+}

@@ -1,0 +1,42 @@
+{
+  "score": 0.88,
+  "gate": "fail",
+  "hard_fail": true,
+  "hard_reasons": [
+    "moral_close_sermon",
+    "glue_ban_heavy"
+  ],
+  "axes": {
+    "anchors": 0,
+    "uneven": 0,
+    "moral_close": 0,
+    "rhythm": 1,
+    "glue_bans": 0
+  },
+  "details": {
+    "words": 63,
+    "sentences": 7,
+    "ban_hits": 3,
+    "anchors": {
+      "per_100": 0.0,
+      "digits": 0,
+      "times": 0,
+      "multi_proper": 0,
+      "codes": 0,
+      "total": 0
+    },
+    "moral": {
+      "hits": 5,
+      "tail_bad": true
+    },
+    "rhythm": {
+      "stdev": 3.02,
+      "n": 7,
+      "shorts": 1
+    },
+    "uneven": {
+      "signals": 0
+    }
+  },
+  "threshold": 6.5
+}

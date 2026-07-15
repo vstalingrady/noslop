@@ -1,0 +1,42 @@
+{
+  "score": 4.91,
+  "gate": "fail",
+  "hard_fail": true,
+  "hard_reasons": [
+    "ban_spam",
+    "glue_ban_heavy"
+  ],
+  "axes": {
+    "anchors": 0,
+    "uneven": 1,
+    "moral_close": 2,
+    "rhythm": 2,
+    "glue_bans": 0
+  },
+  "details": {
+    "words": 56,
+    "sentences": 7,
+    "ban_hits": 10,
+    "anchors": {
+      "per_100": 0.0,
+      "digits": 0,
+      "times": 0,
+      "multi_proper": 0,
+      "codes": 0,
+      "total": 0
+    },
+    "moral": {
+      "hits": 0,
+      "tail_bad": false
+    },
+    "rhythm": {
+      "stdev": 7.25,
+      "n": 7,
+      "shorts": 3
+    },
+    "uneven": {
+      "signals": 2
+    }
+  },
+  "threshold": 6.5
+}

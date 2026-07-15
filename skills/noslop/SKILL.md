@@ -1,27 +1,28 @@
 ---
 name: noslop
 description: >-
-  Use when drafting or rewriting user-facing prose that must score human on
-  StoryScope / noslop P(human), or when the user says noslop, write human,
-  anti AI voice, or /noslop. Not for code cleanup.
+  Use when drafting or rewriting user-facing prose that must not read as AI-slop,
+  or when the user says noslop, write human, anti AI voice, or /noslop. Not for
+  code cleanup. Primary gate is VOICE (reader anti-slop), not StoryScope P(human).
 ---
 
-# noslop
+# noslop (v2)
 
-AI text can score **human** when construction matches human narrative coding —
-not when you only ban “delve” or leave every thread open.
+Write so a careful reader doesn’t bounce. Construction + mess first. Bans second.
+
+StoryScope / XGBoost is **optional diagnostic only**. High P(human) is not “sounds like a book” — books mean ~0.13 on that scorer; see `evals/results/HUMAN_BASELINE.md`. GPTZero can still flag AI. Do not claim undetectable.
 
 **Violating the letter of these rules is violating the spirit of the rules.**
 
 ```
-NO SHIP WITHOUT: PRE-WRITE + draft with human-coding in PROSE + features.json
-(with span cites) + CLI score evidence
+NO SHIP WITHOUT: PRE-WRITE v2 + draft + NOSLOP VOICE (MERGED: PASS)
+StoryScope score is NOT required for ship.
 ```
 
 ## When to use
 
 - Stories, emails, bios, reports, landing copy, long agent answers
-- User wants human-sounding text / higher StoryScope P(human)
+- User wants human-sounding / less slop / noslop
 
 ## When not to use
 
@@ -31,98 +32,94 @@ NO SHIP WITHOUT: PRE-WRITE + draft with human-coding in PROSE + features.json
 ## Core pattern
 
 ```
-1. Fill NOSLOP PRE-WRITE (include aftermath, twist, embodied beat, frame)
-2. Draft so human_coding.md targets are visible in the prose
-3. Fill features.json (high-gain pack fully) — each value needs a cited span
-4. Run CLI score (repo venv, PYTHONPATH=src)
-5. FAIL or P(human) < 0.5 → structural FIX targeting feature gaps (max 2 rounds)
-6. Ship draft + features + score JSON
+1. Fill NOSLOP PRE-WRITE v2
+2. Draft so PRE-WRITE lines show on the page
+3. Fill NOSLOP VOICE grade (or run CLI voice)
+4. FAIL → structural FIX only (max 2 rounds) — not synonym swaps
+5. Surface ban scan (style-and-bans.md) once
+6. Optional: StoryScope features + score (diagnostic footnote only)
+7. Ship with VOICE evidence
 ```
 
-References:
+Refs: [voice.md](voice.md) · [checklists.md](checklists.md) · [style-and-bans.md](style-and-bans.md)  
+Optional StoryScope: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
 
-- [human_coding.md](human_coding.md) — must-hit constructions
-- [checklists.md](checklists.md) — PRE-WRITE / GRADE / SCORE templates
-- [core_features.md](core_features.md) — feature IDs to fill
-- [style-and-bans.md](style-and-bans.md) — surface polish **after** score loop
-
-## PRE-WRITE (required)
+## PRE-WRITE v2 (required)
 
 ```text
 NOSLOP PRE-WRITE
 Audience:
 Length / form:
-Specific anchors (name / number / place / time):
-Aftermath plan (what happens after climax — required):
-End turn / twist (what recontextualizes the piece):
-Embodied emotion beat (body + sensation):
-Frame device if any (log / later tell / none):
-Theme surface (where meaning is allowed to show — not silent):
-Rhythm note:
-Surface risk:
+Anchors (name / number / place / time):
+One deliberate mess / open cost / incomplete beat:
+One boring detail with no payoff:
+What I will NOT force (skip: frame | twist | theme line | long aftermath):
+Where short hits land:
+Surface risk for this genre:
 ```
 
-Then write so every filled line is visible in the draft.
-
-## Draft recipe (human-coding)
+## Draft recipe (VOICE-first)
 
 | Do | How it shows |
 |----|----------------|
-| Extended aftermath | Second scene or time-jump after the peak |
-| End turn | Late reframe of the object, choice, or claim |
-| Embodied feeling | Cold tile, weight in hand, throat — not only “sad” |
-| Theme surface | Thought/speech lets meaning show (level 3–4) — not zero, not pure lecture |
-| Frame when possible | Log, memoir, “I’m writing this after…” |
-| Anchors | Names, numbers, clock times, places |
-| World echo | Song, brand, local detail, cultural gesture |
-| Vary rhythm | Short hits beside longer sentences |
+| Anchors | real names, times, places, numbers |
+| Uneven | one skip, digression, or dead-end detail |
+| No thesis close | end on image/action/cutoff |
+| Rhythm | short next to long |
+| Feeling | body or behavior — not only “sad” |
+| Optional frame/twist | only if natural — not a checklist dump |
 
-**Do not primary-optimize** “leave fully open / never state theme / cut at climax.” Those tank StoryScope P(human).
+**Do not primary-optimize** StoryScope must-hit stack (extended aftermath + theme-4 + climactic twist + memoir frame every time). That games the old scorer and still smells model-made.
 
-## Feature fill (required for score)
+## VOICE grade (required)
 
-1. Load high-gain pack from [core_features.md](core_features.md) / `artifacts/human_coding_targets.json`.
-2. For each ID, set a taxonomy value **only if** a draft span supports it.
-3. Record cites: `ID — "quoted span…"`.
-4. Never forge.
+```text
+NOSLOP VOICE
+anchors:     0-2  PASS|FAIL
+uneven:      0-2  PASS|FAIL
+moral_close: 0-2  PASS|FAIL   (2 = clean)
+rhythm:      0-2  PASS|FAIL
+glue_bans:   0-2  PASS|FAIL
+MEAN: x.x
+HARD: none | moral_close_sermon | ban_spam | zero_anchors
+MERGED: PASS|FAIL
+FIX: …
+```
 
-## SCORE (required)
+CLI (preferred when available):
 
 ```powershell
 cd path\to\noslop
 $env:PYTHONPATH="src"
-.\.venv\Scripts\python.exe -m noslop.cli score --features features.json --json
+.\.venv\Scripts\python.exe -m noslop.cli voice --text-file draft.md --json
 ```
 
-```text
-NOSLOP SCORE
-coverage: x.xx
-P(human): x.xx
-gate: PASS|FAIL
-gaps: (feature IDs that should be true in prose but aren't)
-FIX: structural bullets targeting gaps
-```
+Ship bar: **score ≥ 6.5** and no hard_fail.
 
-Ship bar (eval / strict use): prefer **P(human) ≥ 0.5** and high-gain pack fully filled.
+## StoryScope mode (optional)
 
-## GRADE (structure checklist)
+Only if user asks for StoryScope / P(human) diagnostic:
 
-Still fill structure grade from [checklists.md](checklists.md). Structure FAIL → fix before celebrating a lucky score.
+1. Fill features with span cites ([core_features.md](core_features.md))
+2. `python -m noslop.cli score --features features.json --json`
+3. Report as footnote — **never sole ship gate**
+4. Do not require P(human) ≥ 0.5 for ship
 
 ## Red flags — STOP
 
-- Shipping without PRE-WRITE or score evidence
-- Feature values without span cites
-- FIX = synonym swaps while construction gaps remain
-- Hard cut at climax with no aftermath
-- Theme totally silent **or** pure moral essay with no scene
-- Skipping score because “it sounds fine”
+- Shipping without PRE-WRITE or VOICE PASS
+- Chasing StoryScope 0.5 while VOICE fails
+- FIX = synonym swaps only
+- Thesis closer as last paragraph
+- Zero anchors on long prose
+- Ban/glue spam
+- Claiming GPTZero-proof
 
 ## Rationalizations
 
 | Excuse | Reality |
 |--------|---------|
-| “Open ending is more literary” | This scorer rewards aftermath + turn; write those |
-| “I’ll just edit the JSON” | Forgery fails honesty; rewrite the prose |
-| “Bans list is the skill” | Construction first; bans second |
-| “Sparse features are fine” | Fill high-gain pack; sparse maps floor P(human) |
+| “StoryScope says PASS” | Optional metric; books score ~0.13 |
+| “Sounds fine to me” | Fill VOICE axes or run CLI |
+| “Bans list is the skill” | Construction + mess first |
+| “I’ll force the full arc pack” | Anti-template; detectors still catch it |
