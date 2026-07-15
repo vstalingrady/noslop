@@ -8,87 +8,93 @@ description: >-
 
 # noslop
 
-Human writing is **built** differently, not just word-swapped.  
-Grade structure **inline** in the same turn. **Do not spawn subagents.**
+Human writing is **built** differently, not just word-swapped.
 
-## Pipeline
+**Fast path (default):** you grade structure **inline** in this session.  
+**No second API.** No OpenCode. No subagents. No 10-dimension HTTP fan-out.
+
+## Why not API extract every time?
+
+Live StoryScope extract = ~10 LLM calls over the network → slow, 502s, cost.  
+You are already an LLM in Claude Code / Cursor / whatever. **Use this turn.**
+
+Optional local XGBoost is only for offline numbers after **you** emit a features JSON.
+
+## Pipeline (default — fast)
 
 ```
 1. WRITE under structure rules
-2. INLINE grade on 5 axes (same response / same context)
-3. MERGE → PASS or FAIL
-4. If FAIL: fix structure only → re-grade once more (max 2 rounds)
-5. Ship. Do not invent a pass.
+2. INLINE grade (5 axes) in the same response
+3. MERGE → PASS/FAIL
+4. If FAIL: structural fix → re-grade once (max 2 rounds)
+5. Ship
 ```
 
-Short text (tweets, one-liners) is fine. Use N/A on axes that need length.
-
-## Write rules (structure)
+### Write rules
 
 - Don’t preach the theme. No closing sermon.
-- Don’t over-tidy. Leave friction, a loose end, or grey choice when it fits.
+- Don’t over-tidy. Leave friction / loose end / grey when it fits.
 - Specifics: names, numbers, times, concrete nouns.
-- Uneven rhythm. Mix short and long.
-- Emotion: name it sometimes. Don’t only stack body metaphors.
-- No template rhetoric stacks (“it’s not X, it’s Y” spam, restatement closers).
+- Uneven rhythm.
+- Emotion: name it sometimes; don’t only stack body metaphors.
+- No “it’s not X, it’s Y” spam or restatement closers.
 - Trust the reader.
 
-## Inline grade (5 axes)
-
-After the draft, score all five in one block. No separate agents.
-
-| Axis | Fail if |
-|------|---------|
-| **Theme** | States the moral/lesson; over-explains meaning |
-| **Plot** | Too clean resolution; single-track; paras restate themselves |
-| **Time** | Long piece never breaks pure linear march (short → N/A ok) |
-| **Specificity** | Only abstract claims; no names/numbers/places/objects |
-| **Felt life** | Emotion only body-catalog; no doubt/mess/plain feeling |
-
-### Output shape (required)
+### Inline grade block
 
 ```text
 NOSLOP GRADE
-Theme:       SCORE 0-2  PASS|FAIL|N/A  — one line why
-Plot:        SCORE 0-2  PASS|FAIL|N/A  — one line why
-Time:        SCORE 0-2  PASS|FAIL|N/A  — one line why
-Specificity: SCORE 0-2  PASS|FAIL|N/A  — one line why
-Felt life:   SCORE 0-2  PASS|FAIL|N/A  — one line why
-MEAN: x.x   (ignore N/A)
+Theme:       SCORE 0-2  PASS|FAIL|N/A  — one line
+Plot:        SCORE 0-2  PASS|FAIL|N/A  — one line
+Time:        SCORE 0-2  PASS|FAIL|N/A  — one line  (short text → N/A ok)
+Specificity: SCORE 0-2  PASS|FAIL|N/A  — one line
+Felt life:   SCORE 0-2  PASS|FAIL|N/A  — one line
+MEAN: x.x
 MERGED: PASS|FAIL
-FIX: (if FAIL) bullet structural fixes only
+FIX: …
 ```
 
-**Merge:** mean of scored axes ≥ 1.2 and ≤1 FAIL → PASS. Else FAIL.
+**Merge:** mean of scored axes ≥ 1.2 and ≤1 FAIL → PASS.
 
-On FAIL: apply FIX, rewrite, re-grade. Max 2 full grade rounds.
+| Axis | Fail if |
+|------|---------|
+| Theme | Moral/lesson stated out loud |
+| Plot | Too tidy; restatement closers |
+| Time | Long piece never breaks pure linear march |
+| Specificity | Fog only; no concrete anchors |
+| Felt life | Body-catalog only; no doubt/mess/plain feeling |
 
-## Optional: local XGBoost scorer
+## Optional: local XGBoost (still no second API)
 
-Not part of the default skill path. Only if someone runs the repo CLI.
+Only if the user wants a **numeric** gate and the `noslop` repo is installed.
 
-**Runtime (score with precomputed features or after extract):**
-
-```
-numpy>=1.24
-xgboost>=2.0
-```
-
-**Not required for this skill’s inline grade.**
-
-Train/extract extras (repo only): `pyarrow` for training from parquet; API key if using live feature extract. See repo README.
+1. **You** (this agent) fill StoryScope feature values from the draft — in this session, one shot or by dimension. Write `features.json` as `{"features": { "ID": value, ... }}`.  
+2. Run **local only** (ms, numpy+xgboost):
 
 ```powershell
 cd path\to\noslop
-pip install numpy xgboost
 $env:PYTHONPATH="src"
-python -m noslop.cli score draft.md --features feats.json
+python -m noslop.cli score draft.md --features features.json --json
 ```
+
+Do **not** call OpenCode/OpenAI for extract unless the user explicitly asks for “live API extract”.
+
+### Faster XGBoost variant
+
+Full 304 features is heavy even for you. Prefer:
+
+- **Narrative-only** IDs (skip `STY_*`), or  
+- High-signal subset from `skills/noslop/core_features.md` if present  
+
+Missing IDs encode as empty/zero; still better than a 10-minute HTTP extract.
 
 ## Never
 
-- Spawn subagents / fan-out graders for noslop
-- Ship without NOSLOP GRADE when the user asked for noslop / human prose
-- Synonym-only “fixes” when FAIL was structural
-- Claim detector bypass
-- Confuse with code deslop tools
+- Spawn subagents for grading  
+- Default to live API feature extract  
+- Synonym-only fixes when FAIL was structural  
+- Claim detector bypass  
+
+## Repo note
+
+`noslop` CLI + OpenCode Go env still exist for batch/research extract. **Skill default = host model + optional local score.**
