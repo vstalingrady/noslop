@@ -15,9 +15,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-extract = ["pyyaml>=6.0", "openai>=1.30"]
 encoder = ["pyarrow>=14.0"]
-all = ["pyyaml>=6.0", "openai>=1.30", "pyarrow>=14.0"]
 
 [project.scripts]
 noslop = "noslop.cli:main"
