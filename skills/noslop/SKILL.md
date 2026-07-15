@@ -1,75 +1,96 @@
 ---
 name: noslop
 description: >-
-  Use when drafting or rewriting prose that must sound human (articles, emails,
-  stories, bios, reports, long agent answers), or when the user says noslop,
-  anti AI voice, write human, or /noslop. Gates delivery with the StoryScope
-  paper scorer. Not for code cleanup.
+  Use when drafting or rewriting prose that should read human (articles, emails,
+  stories, bios, reports, tweets, long answers), or when the user says noslop,
+  write human, anti AI voice, or /noslop. Structure-first; not code cleanup.
 ---
 
 # noslop
 
-Write first. Prove it with StoryScope. No vibes-only “I checked.”
+Human writing is **built** differently, not just word-swapped. Gate with five parallel structure checks. No required local model. No mandatory CLI.
 
-## What this is
-
-- **Writing rules** — short construction habits that fight AI monotony  
-- **Gate** — `noslop score` runs the **StoryScope** detector from Russell et al. (arXiv:2604.03136): discourse features → released XGBoost weights  
-
-Paper headline (their numbers, not ours): narrative features alone hit 93.2% macro-F1 human vs AI on long fiction. Domain is ~5k-word stories. Short chat lines are out of distribution — still score long drafts when the user cares.
-
-## Pipeline (required)
+## Pipeline
 
 ```
-draft → save file → noslop score <file> → if FAIL fix → re-score (max 2) → ship with evidence
+1. WRITE under structure rules
+2. FAN-OUT 5 grader subagents (same draft, different axes)
+3. MERGE verdicts → PASS or FAIL
+4. If FAIL: fix only what failed → one re-grade (max 2 rounds)
+5. Ship draft. Do not invent a pass.
 ```
 
-1. Write under the rules below.  
-2. Save non-trivial text to a file.  
-3. Run from the noslop repo (or installed package):
+Short text is fine (tweets too). Graders still run; they just have less evidence.
 
-```bash
-# from C:\Users\vstal\noslop with venv active
-set PYTHONPATH=src
-python -m noslop.cli score path\to\draft.md
-# or: python -m noslop.cli score draft.md --json
+## Write rules (structure)
+
+Do these while drafting. Not a banned-word religion.
+
+- Don’t preach the theme. No closing sermon.
+- Don’t over-tidy. Leave a loose end, grey choice, or jump when it fits.
+- Specifics: names, numbers, times, concrete nouns. Not fog.
+- Uneven rhythm. Mix short and long.
+- Emotion: name it sometimes. Don’t only stack body metaphors.
+- No template rhetoric stacks (“it’s not X, it’s Y” spam, restatement closers).
+- Trust the reader. Under-explain.
+
+## Fan-out: 5 graders
+
+Spawn **5 independent graders in parallel** (subagents or separate calls).  
+Each gets: full draft + **only its axis**.  
+Each returns **only** the block below. No rewrites in the grader pass.
+
+| # | Axis | Fail if |
+|---|------|---------|
+| 1 | **Theme** | Narrator/author states the moral/lesson; over-explains meaning |
+| 2 | **Plot / argument** | Everything resolves too cleanly; single-track with no friction; every para restates itself |
+| 3 | **Time / order** | Only rigid march with no jump, aside, or delayed reveal when the piece is long enough to allow one |
+| 4 | **Specificity** | Vague grandeur; no names/numbers/places/paths; only generic claims |
+| 5 | **Felt life** | Emotion only via body/sense catalog; zero plain feeling words; or zero human mess/doubt |
+
+For very short text (&lt;~50 words): axes 2–3 may return `N/A` (not enough room). Count only scored axes.
+
+### Grader system prompt (paste per agent)
+
+```text
+You are grader axis: {AXIS_NAME}.
+Judge STRUCTURE only. Ignore banned-word vibes unless they change meaning.
+
+Draft:
+---
+{DRAFT}
+---
+
+Return exactly:
+AXIS: {AXIS_NAME}
+SCORE: 0-2   (0=AI-shaped, 1=mixed, 2=human-shaped)
+VERDICT: PASS | FAIL | N/A
+WHY: one sentence, concrete, cite a span if possible
+FIX: one structural change if FAIL, else none
 ```
 
-4. **PASS** = exit 0 (P(human) ≥ 0.5 by default). **FAIL** = exit 1.  
-5. On FAIL: revise, re-score. Max 2 loops.  
-6. Deliver text only with a real score result (exit code or `--json`). Never invent a pass.
+Axis names: `Theme` | `Plot` | `Time` | `Specificity` | `Felt life`
 
-Skip the gate only for tiny replies under ~80 words unless the user demands a score.
+### Merge rule
 
-## Construction rules (write this way)
+- Drop `N/A`.
+- **PASS** if mean SCORE ≥ 1.2 and no more than one FAIL.
+- **FAIL** otherwise.
+- On FAIL: apply the FIX lines (structure only), rewrite draft, re-run all 5 once more. Stop after 2 full grade rounds.
 
-Inspired by what StoryScope measures. Not a banned-word religion.
+## How to fan out
 
-- **Don’t preach the theme.** Let the reader get there.  
-- **Leave a mess when life is messy.** One open thread, moral grey, or time jump beats a tidy moral bow.  
-- **Be specific.** Names, numbers, paths, dates. Vague “landscape of…” is empty.  
-- **Uneven rhythm.** Mix short and long sentences. Don’t march.  
-- **Emotion:** sometimes name it. Don’t only stack body metaphors (tight chest, cold sweat, dim light).  
-- **No template rhetoric.** Cut “it’s not X, it’s Y” stacks, “in today’s world,” and summary closers that restate the paragraph.  
-- **Trust the reader.** Under-explain rather than over-explain.
+Prefer parallel subagents (one axis each). Same draft text to all. No shared chain-of-thought between graders.
 
-## After FAIL
+If subagents unavailable: five sequential calls with the same grader template still OK — worse latency, same logic.
 
-Push the draft toward human-leaning narrative choices the paper found: less explicit moralizing, less single-track causal tidiness, more concrete anchors, less sensory over-write, more genuine ambiguity where it fits the piece.
+## Optional local scorer
 
-Re-run `noslop score`. Don’t synonym-cycle into more slop.
-
-## Domain honesty
-
-StoryScope models were trained on long fiction with 304 discourse features (default gate: `binary_narrative`, style features out). Marketing blurbs and 40-word tweets may score oddly. Say so if you score them anyway.
+Repo `noslop` CLI + XGBoost exists if you want offline numbers later. **Not required.** This skill is prompt + 5 graders.
 
 ## Never
 
-- Claim detector bypass or academic-fraud utility  
-- Ship with “should pass” and no command output  
-- Depend on Superpowers/ECC/OMC for this skill — noslop stands alone  
-- Confuse this with code “deslop” tools  
-
-## Install reminder
-
-Repo: local `noslop` project. Artifacts + StoryScope submodule required. See project README. Runtime score path needs `numpy` + `xgboost`. Live feature extract needs an API key (`OPENAI_API_KEY`) unless you pass `--features` JSON.
+- Ship on vibes without the 5-way merge (unless user said skip gate).
+- Fix “style” only (synonym swaps) when FAIL was structural.
+- Claim detector bypass.
+- Confuse with code deslop tools.
