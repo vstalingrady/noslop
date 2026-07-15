@@ -9,19 +9,12 @@ ARTIFACTS = REPO_ROOT / "artifacts"
 MODELS_DIR = ARTIFACTS / "models"
 TAXONOMY_PATH = ARTIFACTS / "taxonomy.json"
 ENCODER_STATE_PATH = ARTIFACTS / "encoder_state.json"
-STORYSCOPE_ROOT = REPO_ROOT / "third_party" / "storyscope"
-DEFAULT_CONFIG = REPO_ROOT / "config" / "models.yaml"
+# Optional local copy of StoryScope feature parquet for retrain
+FEATURES_PARQUET = ARTIFACTS / "storyscope_features.parquet"
 
-# Prefer noslop-trained weights (match encoder_state). Upstream StoryScope
-# binary_*.json kept for reference but need different column layout.
 MODEL_FILES = {
     "narrative": MODELS_DIR / "noslop_binary_narrative.json",
     "full": MODELS_DIR / "noslop_binary_full.json",
-}
-
-UPSTREAM_MODEL_FILES = {
-    "narrative": MODELS_DIR / "binary_narrative.json",
-    "full": MODELS_DIR / "binary_full.json",
 }
 
 

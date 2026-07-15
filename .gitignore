@@ -13,8 +13,8 @@ build/
 *.log
 outputs/
 cache/
-# large one-time downloads used to build encoder (keep encoder_state.json)
+# large retrain inputs
 artifacts/storyscope_features.parquet
 artifacts/raw/
-
+artifacts/models/binary_*.json
 artifacts/models/multiclass_*.json

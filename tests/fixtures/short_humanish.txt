@@ -1,1 +1,0 @@
-I rewrote the login form three times last night. First version ate the password on Safari. Second fixed Safari and broke the reset email. Third works if you don't mash submit. Ship it Monday; document the mash case.

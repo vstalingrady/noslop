@@ -4,7 +4,8 @@ Train binary human-vs-AI XGBoost on StoryScope feature parquet.
 Uses paper hyperparameters (binary): n_estimators=420, max_depth=8, reg_lambda=2,
 human sample weight 5. Same 304 features / taxonomy as StoryScope.
 
-  pip install pyarrow   # one-time
+  # place storyscope_features.parquet under artifacts/ (or pass --features)
+  pip install pyarrow
   python -m noslop.tools.train_binary
 """
 
@@ -24,8 +25,8 @@ if str(_ROOT / "src") not in sys.path:
 from noslop.encode import build_column_plan, encode_row, load_encoder_state
 from noslop.paths import (
     ENCODER_STATE_PATH,
+    FEATURES_PARQUET,
     MODELS_DIR,
-    STORYSCOPE_ROOT,
     TAXONOMY_PATH,
 )
 from noslop.taxonomy import Taxonomy
@@ -46,7 +47,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument(
         "--features",
         type=Path,
-        default=STORYSCOPE_ROOT / "data" / "storyscope_features.parquet",
+        default=FEATURES_PARQUET,
+        help="StoryScope storyscope_features.parquet (default: artifacts/)",
     )
     p.add_argument("--taxonomy", type=Path, default=TAXONOMY_PATH)
     p.add_argument("--encoder", type=Path, default=ENCODER_STATE_PATH)
