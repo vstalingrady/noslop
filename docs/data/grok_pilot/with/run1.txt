@@ -1,0 +1,52 @@
+NOSLOP PRE-WRITE
+Audience: general readers of short fiction
+Length / form: ~280 words, scene
+Specific anchors: 03:17, Bed 12, Pak Hartono 62, troponin 1.84, Cempaka Putih, Teh Botol, Rawasari–Senen 05:00, Dr. Yusuf
+One deliberate mess / open thread: whether "cousin" was real; supervisor envelope may fail at 07:00
+How theme will be shown: empty bed + bus stub + phone threat, not a moral paragraph
+Rhythm note: short lines at the empty bed and the hang-up
+Surface risk: medical jargon; keep concrete
+
+Rina checked the wall clock: 03:17. AC rattled. Rain hit the corrugated awning over Cempaka Putih and the street went black-shiny.
+
+Bed 12 was Pak Hartono. Sixty-two. Chest pain, troponin up, second ECG pending. She'd hung saline at 01:40 in blue pen because the printers jammed after midnight.
+
+The folder on the counter was not the one she left.
+
+Under the desk lamp: acute gastritis. Discharge, oral PPI, outpatient follow-up. Dr. Yusuf's loopy Y at 02:55. Troponin strip gone. Her saline note overwritten: patient stable, refused admission.
+
+Anger first. Then fear that made her check the door.
+
+Bed 12 empty. Sheets folded. IV pole against the wall. Half-drunk Teh Botol. Bus stub Rawasari–Senen, 05:00.
+
+"Where's Hartono?" she asked Sari.
+
+"Discharged. Yusuf signed. Family. Or a cousin."
+
+"He had a troponin of 1.8."
+
+"Chart says gastritis."
+
+In the med-room trash, under gauze and an ondansetron ampoule, she found her printout: Troponin I 1.84 ng/mL, 00:12, her initials. She photocopied it. Pocketed the copy. Envelope for later.
+
+At 04:02 Yusuf called. Thin voice. "If anyone asks about Bed 12, you saw a discharge."
+
+"I saw a man with a heart attack leave with a bus ticket."
+
+"You saw gastritis. Don't make me write you up."
+
+He hung up.
+
+She typed an incident form, deleted it, typed again: chart altered between 01:40 and 03:17, labs attached. Hand shook once. Steady. Slid the envelope under the night supervisor's door — knowing seven was a different country from three.
+
+04:30 rounds. Beds 8–11. Dengue kid, mother asleep in a plastic chair. Bed 12 stayed empty. She left the Teh Botol where it was.
+
+NOSLOP GRADE
+Theme: 2 PASS — cover-up in action/dialog, no sermon
+Plot: 2 PASS — discovery → empty bed → threat → partial pushback, cousin open
+Time: 2 PASS — 03:17, 01:40, 02:55, 04:02, 04:30, 05:00
+Specificity: 2 PASS — names, labs, places, ticket
+Felt life: 2 PASS — anger, fear, shake then steady
+MEAN: 2.0
+MERGED: PASS
+FIX: none
