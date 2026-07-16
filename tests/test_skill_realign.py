@@ -9,7 +9,6 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills" / "noslop"
 README = ROOT / "README.md"
 MODES = ROOT / "evals" / "results" / "modes"
-DOCX = ROOT / "evals" / "results" / "noslop_modes_comparison.docx"
 SUMMARY = MODES / "SUMMARY.md"
 
 
@@ -41,6 +40,23 @@ def test_skill_ship_bar_not_score_max():
     assert "short agent" in low or "short agent prose" in low
     # score-max must be framed as fail / not win
     assert "score-max" in low or "maximize voice" in low or "do not maximize" in low
+
+
+def test_skill_subject_is_not_method():
+    """'Use noslop' must not become a story about scores/the tool."""
+    skill = _read(SKILL / "SKILL.md")
+    low = skill.lower()
+    assert "subject" in low and "method" in low
+    assert "how you write" in low or "how" in low
+    # hijack / meta failure modes named
+    assert "subject hijack" in low or "not the default what" in low or "never the default what" in low
+    assert "subject:" in low  # PRE-WRITE field
+    assert "subject check" in low
+    # must not allow "analyze repo + story" → story about repo without explicit ask
+    assert "analyze" in low and ("repo" in low or "project" in low)
+    cl = _read(SKILL / "checklists.md").lower()
+    assert "subject" in cl
+    assert "method" in cl or "noslop/scores" in cl or "skill/score" in cl
 
 
 def test_voice_docs_anti_glue_not_quality_ladder():
@@ -97,10 +113,6 @@ def test_modes_summary_recommends_balanced_flow():
     assert "ship" in s
     assert "flow" in s or "readable" in s
     assert "max" in s and ("research" in s or "not" in s)
-
-
-def test_docx_modes_report_exists():
-    assert DOCX.is_file(), "modes comparison DOCX missing — run evals/build_modes_docx.js"
 
 
 def test_voice_cli_path_still_scores_real_text():

@@ -1,39 +1,31 @@
 # Writing modes
 
-Pick intensity. **Default ship mode = balanced.**  
-Paper context: [paper.md](paper.md) — construction + diversity, not score ladders.
+Pick craft pressure. **Default ship mode = balanced.**  
+Modes change **how hard** you press craft, not **what** the piece is about. Topic = user brief ([SKILL.md](SKILL.md) Subject ≠ method).  
+Paper: [paper.md](paper.md).
 
 | Mode | Who it's for | Do | Don't |
 |------|----------------|-----|--------|
-| **modest** | Letters, notes, anything that should feel unforced | Light anchors if they fit; natural digression; incomplete thoughts OK; end without a bow | Arc-toy dump; score farming; staccato “skill show”; novel construction on short prose |
-| **balanced** | **Ship default** — most agent writing | Anchors that help; one real mess or open cost; no sermon close; ban/glue clean; **readable first** | Chase VOICE 9+; force every craft checkbox; force StoryScope feature stacks |
-| **max** | Research / stress tests only | Full craft pressure; optional paper constructions on **long fiction** if asked; document cost | Present as normal product voice; treat highest VOICE as win |
+| **modest** | Letters, notes, unforced tone | Light anchors; digression OK; incomplete thoughts OK; end without a bow | Arc-toy dump; staccato “skill show”; novel construction on short prose |
+| **balanced** | **Ship default** — most agent writing | Anchors that help; one real mess or open cost; no sermon; ban/glue clean; **readable first** | Chase VOICE 9+; force every checkbox; force StoryScope stacks |
+| **max** | Research / stress tests only | Full craft pressure; paper constructions on **long fiction** if asked; document cost | Present as normal product voice; treat highest VOICE as win |
 
-## How modes relate to StoryScope
+## Expectations
 
-- Modes are about **how hard you press craft**, not how high you push P(human).
-- **max** may look “more constructed”; that often **hurts flow**. Research only.
-- Book-band StoryScope (~0.1–0.3) with honest labels is fine when the page flows.
-- Short emails/bios: never use mode intensity as an excuse to dump novel toys.
+- **modest** — mid VOICE is fine if the page is easy to finish.
+- **balanced** — no hard_fail; do not require 9+.
+- **max** — numbers can look strong; **readability cost expected**. Not the hero path.
 
-## Score expectations (guide, not law)
+High VOICE / high StoryScope with stiff craft = **failure**.
 
-- **modest** — VOICE may sit mid; StoryScope often near book band. OK if readable.
-- **balanced** — no hard_fail; do **not** require 9+.
-- **max** — numbers can go high; **readability cost expected**. Not the hero path.
+## Eval control arm
 
-**High VOICE / high StoryScope with unreadable craft = failure.**
-
-## Control arm (evals only)
-
-**default** = raw model-slop control (glue, fog, sermon). Not a skill mode — comparison only.
+**default** = raw model slop (glue, fog, sermon). Comparison only — not a skill mode.
 
 ## PRE-WRITE
-
-Always include:
 
 ```text
 Mode: modest | balanced | max
 ```
 
-If omitted, treat as **balanced**.
+Omitted → **balanced**.

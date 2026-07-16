@@ -1,29 +1,28 @@
 # StoryScope human-coding (lab only)
 
-**Not a ship recipe.** Ship = [paper.md](paper.md) construction (fiction) or flow + anti-glue (short prose) + no VOICE hard_fail.
+Optional diagnostic path. **Not a ship recipe.**  
+Ship = fiction construction or short-prose flow + no VOICE hard_fail ([paper.md](paper.md), [SKILL.md](SKILL.md)).
 
-Use only when:
+Use when:
 
-1. User explicitly asks for StoryScope / P(human) diagnostics, **and**
-2. Text is long enough that discourse features mean something (prefer ~1k–5k+ words fiction), **or** research evals.
+1. User asks for StoryScope / P(human) diagnostics, **and**
+2. Text is long enough for discourse features (prefer ~1k–5k+ words fiction), **or** research evals.
 
-## Why lab only
+## Context
 
 - Paper measured **construction** on ~5k-word parallel stories; features **extracted**, not forged.
 - Local books mean ~**0.13** P(human) (`evals/results/HUMAN_BASELINE.md`) and still read as human.
-- Forced must-hit stacks can raise the binary while prose stays stiff — that is **score farming**, not skill success.
+- Forced must-hit stacks can raise the binary while prose stays stiff — score farming, not skill success.
 - Never require P(human) ≥ 0.5 to ship.
 
-## Honest labeling rules
+## Labeling rules
 
 1. Label only what is **true on the page** (span cites).
 2. Never invent features to raise score.
-3. Short agent prose: usually **skip** this path entirely.
+3. Short agent prose: usually **skip** this path.
 4. Report score as a **footnote**, never sole gate.
 
-## Paper-aligned construction notes (long fiction)
-
-When writing fiction (not when filling JSON for the scorer):
+## Construction notes (long fiction)
 
 | Prefer | Avoid |
 |--------|--------|
@@ -33,12 +32,12 @@ When writing fiction (not when filling JSON for the scorer):
 | Named world / specific mess | Vague “philosophy dialogue” default |
 | Diversity across drafts | One winning feature pack every time |
 
-## Optional diagnostic table (if scoring long fiction)
+## Optional diagnostic table
 
-Only mark a row if the draft **shows** it. Empty / N/A is fine.
+Only mark a row if the draft **shows** it.
 
-| ID | Paper-ish idea | Only if true on page |
-|----|----------------|----------------------|
+| ID | Idea | Only if true on page |
+|----|------|----------------------|
 | SIT_MET_303 | Theme not over-explained | theme in scene, not TED close |
 | PLT_* / resolution | Not only tidy protagonist bow | open cost or multi-track if present |
 | TMP_* | Temporal complexity | real jumps/flashbacks — don’t invent |

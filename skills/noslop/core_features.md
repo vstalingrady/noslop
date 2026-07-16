@@ -1,12 +1,12 @@
-# Feature IDs (StoryScope diagnostic only)
+# Feature IDs (StoryScope diagnostic)
 
-Optional. Ship does **not** require filling these or P(human) ≥ 0.5.
+Optional lab path. Ship does not require filling these or P(human) ≥ 0.5.
 
-Primary gate: `python -m noslop.cli voice --text-file draft.md --json`
+Primary check: `python -m noslop.cli voice --text-file draft.md --json`
 
-## When to use
+## When
 
-User explicitly wants StoryScope / discourse-feature score.
+User wants a StoryScope / discourse-feature score.
 
 ```powershell
 $env:PYTHONPATH="src"
@@ -26,4 +26,4 @@ Each filled ID needs a quoted span from the draft. Forge → invalid diagnostic.
 
 ## Books baseline
 
-Mean P(human) on classic excerpts ~**0.13**. Do not treat gate PASS as literary quality.
+Mean P(human) on classic excerpts ~**0.13**. PASS on this scorer is not the same as literary quality.
