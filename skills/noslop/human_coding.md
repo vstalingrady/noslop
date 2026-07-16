@@ -1,7 +1,9 @@
 # StoryScope human-coding (lab only)
 
 Optional diagnostic path. **Not a ship recipe.**  
-Ship = fiction construction or short-prose flow + no VOICE hard_fail ([paper.md](paper.md), [SKILL.md](SKILL.md)).
+**Writing long fiction uses [construction.md](construction.md)** (PRE-STRUCTURE, sparse moves, page judgment). This file is only for honest feature scoring when asked.
+
+Ship = construction or short-prose flow + no VOICE hard_fail + careful reader finishes the page ([paper.md](paper.md), [SKILL.md](SKILL.md)).
 
 Use when:
 
@@ -14,6 +16,7 @@ Use when:
 - Local books mean ~**0.13** P(human) (`evals/results/HUMAN_BASELINE.md`) and still read as human.
 - Forced must-hit stacks can raise the binary while prose stays stiff — score farming, not skill success.
 - Never require P(human) ≥ 0.5 to ship.
+- Higher P(human) is **not** “more human.”
 
 ## Labeling rules
 
@@ -24,13 +27,15 @@ Use when:
 
 ## Construction notes (long fiction)
 
+Prefer the full method in [construction.md](construction.md). Lab shorthand:
+
 | Prefer | Avoid |
 |--------|--------|
 | Theme in scene / action | Narrator explains the lesson |
 | Grey / open moral cost | Tidy single-track acceptance bow |
 | Temporal texture if length allows | Fake flashbacks in a postcard |
 | Named world / specific mess | Vague “philosophy dialogue” default |
-| Diversity across drafts | One winning feature pack every time |
+| Diversity across drafts (seed) | One winning feature pack every time |
 
 ## Optional diagnostic table
 
@@ -56,4 +61,5 @@ $env:PYTHONPATH="src"
 - Forge features  
 - Use this checklist as PRE-WRITE for emails  
 - Ship or fail ship on P(human)  
+- Treat this file as a must-hit writing coach  
 - Retrain or “improve” by gaming the binary  

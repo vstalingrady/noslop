@@ -11,15 +11,16 @@ Write so a careful human finishes the page.</p>
 
 ## What it is
 
-Model drafts often arrive as glue, fog, and a tidy moral. noslop is a skill pack your agent loads before it writes: a short PRE-WRITE, genre rules (long fiction vs short email/bio/blurb), and a local **VOICE** check so bad structure fails before you ship.
+Model drafts often arrive as glue, fog, and a tidy moral. noslop is a skill pack your agent loads before it writes: PRE-WRITE, **structure-first** rules for long fiction (sparse construction, not scoremax), genre split for short email/bio/blurb, and a local **VOICE** anti-glue floor — then you ship only if a careful reader would finish the page.
 
-Grounded in [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al.) — findings about **how** stories are built on long fiction — plus plain flow and anti-glue for everyday agent prose.
+Grounded in [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al.) — findings about **how** stories are built on long fiction — plus plain flow and anti-glue for everyday agent prose. High VOICE or P(human) is **not** the win.
 
 | You get | Where |
 |---------|--------|
 | Skill for Claude Code / similar | [`skills/noslop/`](skills/noslop/) |
-| VOICE score on a draft | `python -m noslop.cli voice` |
-| Optional StoryScope feature score | `python -m noslop.cli score` |
+| Long-fiction construction guide | [`skills/noslop/construction.md`](skills/noslop/construction.md) |
+| VOICE check (anti-glue floor) | `python -m noslop.cli voice` |
+| Optional StoryScope feature score (lab) | `python -m noslop.cli score` |
 | Side-by-side drafts + charts | [`evals/`](evals/) |
 
 **Trigger:** `noslop` · “write human” · “anti AI voice” · `/noslop`  
@@ -28,12 +29,16 @@ Grounded in [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al.) — 
 ```mermaid
 flowchart LR
   A[Brief] --> B[PRE-WRITE]
-  B --> C[Draft]
-  C --> D{Hard fail?}
-  D -->|sermon / ban spam / zero anchors| C
-  D -->|clean| E{Page flows?}
-  E -->|no| C
-  E -->|yes| F[Ship]
+  B --> C{Long fiction?}
+  C -->|yes| D[PRE-STRUCTURE + sparse 2-4 moves]
+  C -->|no| E[Draft short prose]
+  D --> F[Draft for reader]
+  E --> F
+  F --> G{Hard fail?}
+  G -->|sermon / ban spam / zero anchors| F
+  G -->|clean| H{Page flows?}
+  H -->|no structural FIX| F
+  H -->|yes| I[Ship]
 ```
 
 ---

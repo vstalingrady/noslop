@@ -3,7 +3,8 @@
 Soft anti-glue check on the draft. Complements StoryScope (lab); not a “human quality” ladder to maximize.
 
 Ship on **hard fails** and whether a careful person finishes the page.  
-Mid VOICE with natural flow beats a stiff 9+.
+Mid VOICE with natural flow beats a stiff 9+.  
+**Higher VOICE ≠ more human.** Long fiction structure lives in [construction.md](construction.md).
 
 Paper: [paper.md](paper.md).
 
@@ -45,6 +46,11 @@ Avoid stacking these every draft:
 - One **boring** true detail
 - End on image / action / cutoff — not a moral restatement
 - Fragments, contractions, interrupt when natural
+- Full ban + surface pass in [style-and-bans.md](style-and-bans.md) before calling VOICE “clean”
+
+## Surface (must clear with bans)
+
+VOICE does **not** replace the ban list. After score, still zero hard-ban words; no parataxis spam; em dashes in budget.
 
 ## Genre notes
 

@@ -23,17 +23,28 @@ Corpus: parallel ~**5,000-word** stories from the same prompts. Features were **
 - **Specific outside world** — names, places, cultural detail
 - **More diversity** — rarer combinations of narrative decisions
 
+## Do not invert the detector into a generator
+
+StoryScope is a **research detector / description** tool — not a writing coach that says “maximize P(human).”
+
+- A **must-hit** stack of every human-leaning feature creates a **new cluster** (still model-made).
+- Use **sparse** selection (2–4 moves) + a **diversity seed** (deliberately unused moves). See [construction.md](construction.md).
+- Features should be **extracted** from real text with span cites — never forged to raise a score.
+- Style polish alone barely changes narrative detection; **structure** must change on the page.
+- Book-band scores (~0.1–0.3 P(human)) with honest labels are fine when the page flows.
+
 ## How noslop uses this
 
 | Form | Apply |
 |------|--------|
-| **Long fiction** (~1k+ words) | Less theme dump; greyer choices; time texture when length allows; avoid single-track tidy lesson |
+| **Long fiction** (~1k+ words) | PRE-STRUCTURE → sparse 2–4 moves → draft → structural FIX → polish ([construction.md](construction.md)) |
 | **Short agent prose** | Flow + anti-glue + real anchors — leave novel discourse toys out |
 
 | Ship | Lab |
 |------|-----|
-| Readable page finishes | StoryScope CLI / feature packs when asked |
-| VOICE hard fails (sermon / ban spam) | Honest feature labels only — never forge |
-| Balanced mode default | Book-band scores (~0.1–0.3 P(human)) are fine when the page flows |
+| Careful reader finishes the page | StoryScope CLI / feature packs when asked |
+| VOICE hard fails (sermon / ban spam) as anti-glue floor only | Honest feature labels only — never forge |
+| Balanced mode default; sparse construction | Book-band scores fine when page flows |
+| Score-max + stiff craft = FAIL | Never sole ship gate |
 
-Ban lists clean surface noise. Construction and flow carry the writing.
+Ban lists clean surface noise. Construction and flow carry the writing. High VOICE or high P(human) is **not** “more human.”
