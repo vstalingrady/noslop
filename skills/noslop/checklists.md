@@ -1,134 +1,88 @@
 # noslop checklists
 
-Ship: PRE-WRITE + (long fiction: PRE-STRUCTURE) + no VOICE hard_fail + **readable page**.  
-StoryScope optional (lab). Structure: [construction.md](construction.md) · [paper.md](paper.md).
+These are **scans to run over a draft**, not ingredients to put in one.
+A scan that finds nothing changes nothing.
 
-## PRE-WRITE
+## PRE-WRITE (four lines)
+
+Mental is fine for anything under ~300 words.
 
 ```text
-NOSLOP PRE-WRITE
-Mode: modest | balanced | max
 Subject:   (piece topic/plot — not noslop/scores/skill unless user asked)
 Audience:
-Length / form:   (short agent | long fiction)
-Anchors (name / number / place / time):
-One deliberate mess / open cost / incomplete beat:
-One boring detail with no payoff:
-What I will NOT force:
-Where short hits land (if natural):
-Surface risk for this genre:
-Subject check: no skill/score/repo meta in draft unless Subject allows — Y/N
+Form / length:
+Biggest risk for this piece:  (glue? sermon? over-craft? fog?)
 ```
 
-Rules:
+Subject ≠ method: noslop is HOW you write. If Subject would be the
+tool/scores/repo and the user didn't ask for that topic → stop, take a real
+premise.
 
-- Mode default = **balanced** if omitted. **max** = research only.
-- **Subject ≠ method:** noslop is HOW. If Subject is the tool/scores/repo and user didn’t ask for that topic → FAIL PRE-WRITE; take a real premise.
-- Anchors concrete, not “something specific later.”
-- Mess/incomplete: skip only if form is one-line; write `N/A — too short`.
-- **Short agent prose:** “What I will NOT force” includes at least one **novel toy** (frame / twist / multi-scene aftermath / theme scale).
-- **Long fiction:** include **theme dump** and/or **tidy single-track lesson close** in “What I will NOT force.”
-- See [modes.md](modes.md) · [SKILL.md](SKILL.md) · [construction.md](construction.md).
+## Slop scan (all forms)
 
-## PRE-STRUCTURE (long fiction only)
-
-Required **before prose**. Full guide: [construction.md](construction.md).
+Run over the draft; cut what you find. Zero hits = done.
 
 ```text
-NOSLOP PRE-STRUCTURE
-Premise:
-POV:
-Moral grain:          (grey choice / open cost)
-Time shape:           linear | one jump | frame | braided
-Tracks:               spine + optional B / loose end
-Theme location:       scene/action only
-World anchors:        2–4 named
-Emotion policy:       mix named + body; no body-every-paragraph
-Ending type:          (acceptance-bow banned unless earned)
-Diversity seed:       one human-leaning move I will NOT use
-Palette picks (2–4):  …
-Anti-AI refused:      theme dump | single-track tidy | setting-as-mood spam
+Hard-ban words / phrases / openers:   0 hits
+Template patterns (Not just X but Y…): 0 hits
+Sermon / lesson close:                 none
+Parataxis stack (short. short. short.): none
+Rule-of-three default:                 none
+Em-dash spam (~≤1/500w):               ok
+Markdown-in-email / format leaks:      none
+Invented stats/quotes/anecdotes:       none
 ```
 
-- No diversity seed → FAIL for long fiction.
-- Stacking all palette moves → FAIL (new cluster).
-- Skip this entire block for emails/bios/blurbs.
+Full lists + swaps: [style-and-bans.md](style-and-bans.md).
 
-## VOICE grade
+## Over-application scan (all forms)
+
+Cut these too — they're the skill's own slop:
 
 ```text
-NOSLOP VOICE
-anchors:     0-2  PASS|FAIL
-uneven:      0-2  PASS|FAIL
-moral_close: 0-2  PASS|FAIL
-rhythm:      0-2  PASS|FAIL
-glue_bans:   0-2  PASS|FAIL
-MEAN: x.x   (informative — do not max; higher ≠ more human)
-HARD: none | moral_close_sermon | ban_spam | zero_anchors
-MERGED: PASS|FAIL   (FAIL only on HARD)
-FIX: …
+Anchor stuffing (digits nobody needed):      none
+Fragment cosplay (pronouns stripped):        none
+Signature closer ("delete it", "No deck."):  none
+Punchy moral one-liner as last beat:         none
+Boring-detail theater / manufactured mess:   none
+Same skeleton as your last noslop piece:     no
 ```
 
-| Axis | 2 | 0 |
-|------|---|---|
-| anchors | real times/names/numbers | fog |
-| uneven | skip / digression / dead detail | every line pays off |
-| moral_close | no sermon close | used-to-think / lesson close |
-| rhythm | length varies naturally | flat or forced staccato show |
-| glue_bans | clean | ban spam |
+## Long fiction (only when structure sags)
 
-CLI: `python -m noslop.cli voice --text-file draft.md --json`  
-**Ship block:** `hard_fail` only (anti-glue floor). Page judgment is still required.
-
-## Fiction construction (long form only)
-
-After draft, confirm structure — not score farming:
+Light PRE-STRUCTURE from [construction.md](construction.md) — pick 0–3 moves,
+linear default, diversity seed = moves you deliberately skip. Never stack the
+palette; never force a time jump. Empty palette + clean scans + a page that
+reads = valid ship.
 
 ```text
-NOSLOP FICTION (long form)
-PRE-STRUCTURE filled?              Y/N
-Diversity seed set?                Y/N
-Palette sparse (2–4 only)?         Y/N
-Theme dump avoided?                Y/N
-Grey choice / open cost?           Y/N
-Time texture if length allows?     Y/N/N/A
-Tidy single-track lesson close avoided? Y/N
-Structural FIX used if needed (not synonym-only)? Y/N/N/A
-Page would finish for a careful reader? Y/N
+Tidy lesson / TED close:            none
+Forced moves that don't earn space: none
+Synonym-only "FIX":                 not a fix
 ```
 
-Skip for emails/bios/blurbs. See [construction.md](construction.md).
+## Long nonfiction (~1k+ words — only when one register runs the whole piece)
 
-## StoryScope SCORE (lab)
+Light PRE-DRAFT from [structure-nonfiction.md](structure-nonfiction.md) —
+pick 2–4 palette moves, seed macro choices (order / omissions / stopping
+points), name the skips. Detector checks are smoke tests: max one structural
+re-pass, section level only, no paraphrase tools.
 
 ```text
-NOSLOP SCORE (lab)
-coverage: x.xx
-P(human): x.xx
-note: footnote only; books mean ~0.13; never forge; never ship gate
+Every section same shape:            no
+Kicker/closing beat on every section: no
+Zero restatement of any point:       no
+Every raised question resolved:      no
+One register held end to end:        no
+Sentence-level score chasing:        never
 ```
 
-## Surface polish + bans (required — all forms)
-
-Not optional. Not “once if you feel like it.” Run after structure/draft; before ship.
+## VOICE (optional)
 
 ```text
-NOSLOP STYLE+BANS
-Hard-ban words:     0 hits?     Y/N
-Hard-ban phrases:   0 hits?     Y/N
-Hard-ban openers:   0 hits?     Y/N   (Certainly, Moreover, Great question!, …)
-Template patterns:  0 hits?     Y/N   (Not just X but Y, In a world where, …)
-Parataxis spam:     gone?       Y/N   (not Short. Short. Short. whole para)
-Rule of three:      broken?     Y/N
-Em dashes:          ~≤1/500w?   Y/N
-Rhythm:             mixed?      Y/N
-Active / no pep:    OK?         Y/N
-Format context:     OK?         Y/N   (no md headers in email, etc.)
-Honesty:            no invents? Y/N
-Pre-ship 11-check:  done?       Y/N
-Soft bans:          only literal/tech? Y/N
+hard_fail flags: none   ← only this blocks ship
+fragment_stacks ≥ 3: rewrite with pronouns
+(lab) score: informational — never iterate to raise it
 ```
 
-Full lists + swaps + 11-check: [style-and-bans.md](style-and-bans.md).  
-Polish last on long fiction — never a substitute for PRE-STRUCTURE.  
-Never a substitute to skip this after good structure.
+CLI: `python -m noslop.cli voice --text-file draft.md`

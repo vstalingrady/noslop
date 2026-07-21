@@ -3,25 +3,49 @@ name: noslop
 description: >-
   Draft or rewrite user-facing prose so it doesn’t read like template AI.
   Triggers: noslop, write human, anti AI voice, /noslop. Not for code cleanup.
-  Method only — never the default topic of the draft. Prefer human flow over
-  maxing VOICE or StoryScope P(human). Long fiction: structure-first sparse
-  construction; ship by page judgment, not score.
+  Method only — never the default topic of the draft. Draft first, then cut
+  only the tells actually present; never decorate to satisfy this file.
 ---
 
 # noslop
 
 Write so a careful human finishes the page.
 
-**Both pillars required — not either/or:**
+**This skill is a linter, not a style.** Draft from the brief first, plainly.
+Then scan for tells — AI slop tells *and* noslop over-application tells — and
+cut only what you actually find. If the plain draft already reads fine, ship
+it unchanged. Decorating a fine draft to satisfy this file is the most common
+noslop failure, and it produces a new kind of slop.
 
-| Pillar | What | Doc |
-|--------|------|-----|
-| **Construction** | How the story is built (theme/plot/time/agency) | [construction.md](construction.md) · [paper.md](paper.md) |
-| **Style + bans** | Hard-ban words/phrases/openers, surface structure (parataxis, rule-of-three, dash budget), formatting, pre-ship check | [style-and-bans.md](style-and-bans.md) · [voice.md](voice.md) |
+## Ship bar
 
-Long fiction: structure first (StoryScope arXiv:2604.03136) → draft → structural FIX → **mandatory ban/style pass**.  
-Short agent prose: flow + anchors + **same ban list** — **no** novel toys.  
-Structure without ban hygiene = still slop. Ban swaps without structure = still AI fiction.
+```
+A careful human finishes the page without fatigue or "this is a template"
+nausea — and without spotting the noslop signature either.
+Score-max with stiff craft = FAIL even if every scan passes.
+Metrics are footnotes, never the win.
+```
+
+## Workflow
+
+```
+1. DRAFT from the brief. No checklist in hand.
+2. READ like a stranger. Would a careful human finish it?
+   Yes → ship. No → name the specific failure, then fix that failure only.
+3. SLOP SCAN — hard bans / templates / sermon close, if present.
+   [style-and-bans.md](style-and-bans.md). Zero hits = step done.
+4. OVER-APPLICATION SCAN — noslop tells (below). Cut what you find.
+5. LONG PROSE ONLY — if it sags structurally: fiction →
+   [construction.md](construction.md) (tidy lesson, on-rails causality;
+   0–3 moves, linear default); nonfiction →
+   [structure-nonfiction.md](structure-nonfiction.md) (one sustained
+   register; 2–4 palette picks, named skips). Linear + plain is a valid ship.
+6. VOICE flags (optional) — hard fails only. There is no grade to raise.
+7. SHIP when a careful human would finish the page.
+```
+
+Steps 3–6 are scans, not ingredients. A scan that finds nothing changes
+nothing.
 
 ## Subject ≠ method
 
@@ -31,197 +55,127 @@ noslop = HOW you write. Never the default WHAT.
 
 | User said | You do | You do **not** |
 |-----------|--------|----------------|
-| “use noslop” / “/noslop” / “write human” | Apply craft **invisibly** | Write about noslop, VOICE, scores, bans, detectors, or “AI slop” |
-| “analyze this repo” **and** “write a story” | Analyze in chat if needed; story = normal fiction | Allegory of the analysis, commits, CLI, evals |
-| “~5k word story” with no plot | Ordinary human premise | Meta story about scoring or this tool |
+| “use noslop” / “/noslop” / “write human” | Apply the scans **invisibly** | Write about noslop, VOICE, scores, bans, detectors, or “AI slop” |
+| “analyze this repo” **and** “write a story” | Analyze in chat; story = normal fiction | Allegory of the analysis, commits, CLI, evals |
 | “story **about** noslop / this project” | Topic allowed | — |
 
-If PRE-WRITE **Subject** would be the skill/scores/repo and the user didn’t ask for that → **STOP** and pick a real premise.
+Subject check before drafting: if the piece would be about the skill, the
+scores, or the repo and the user didn’t ask for that — stop, pick a real
+premise.
 
-## Ship bar
+## Slop tells (cut when present)
 
-```
-A careful human finishes the page without fatigue or “this is a template” nausea.
-Readable first. Do not maximize VOICE or StoryScope at the cost of flow.
-Mode default = balanced. max = research only.
-Score-max with stiff craft = FAIL even if numbers look great.
-High P(human) or high VOICE is never “more human” by itself — page judgment is the ship bar.
-Metrics are footnotes only.
-```
+The full ban list lives in [style-and-bans.md](style-and-bans.md): glue words
+(delve, leverage, seamless), template phrases (“In today’s…”, “It’s worth
+noting”), empty openers (“Certainly,”), sermon closes, em-dash spam, rule-of-three
+stacking. These are *detectors of failure*, not a list of things to avoid
+thinking about — if none appear in the draft, move on.
 
-```
-NO SHIP WITHOUT:
-  PRE-WRITE (Mode + Subject)
-  + long fiction: PRE-STRUCTURE + diversity seed + sparse palette (2–4)
-  + draft
-  + structural FIX if needed (not synonym-only)
-  + style-and-bans pass (hard bans gone; rhythm/punct OK)  ← REQUIRED
-  + no VOICE hard_fail (sermon / ban spam / zero anchors)
-  + careful reader would finish the page
-Skipping the ban list because "structure is enough" = FAIL.
-Skipping structure because "I banned delve" = FAIL.
-Do NOT require VOICE 9+ or StoryScope P(human) ≥ 0.5.
-Book-band StoryScope (~0.1–0.3) with honest labels is fine when the page flows.
-```
+## Noslop tells (over-application — cut when present)
+
+Applying this skill too hard has its own signature. If the draft shows these,
+**you over-applied the skill. Remove them.**
+
+| Tell | Looks like |
+|------|------------|
+| **Anchor stuffing** | A number, name, time, or place crammed into every sentence; digits that don’t need to exist |
+| **Fragment cosplay** | Subjectless telegraph lines with pronouns stripped, stacked for texture (“Rain. Bus plastic. Four dollars.”) |
+| **Signature closer** | “If this is noise, delete it.” / “No deck.” / any performative punchy exit |
+| **Punchy moral one-liner** | A single-line zinger as the last beat (“That just multiplies noise.”) |
+| **Boring-detail theater** | A deliberately pointless detail inserted *to seem* human |
+| **Manufactured mess** | A problem invented because a checklist said “one mess” |
+| **Em-dash as personality** | Dashes used as a voice, not a punctuation choice |
+| **Same skeleton** | The draft has the same shape as your last noslop draft |
+
+Root rule: **if a rule made the text weirder, the rule was wrong for this
+draft.** Delete the effect, keep the draft.
+
+## Specifics: honest or absent
+
+Use the real specifics the brief gives you. Invent none (no fake stats,
+names, dates, anecdotes). If the brief has no specifics, write well without
+them — plain and honest beats decorated. Anchors are seasoning that may be
+present, never a quota to fill.
 
 ## Genre split
 
 | Form | Rules |
 |------|--------|
-| **Long fiction** (stories, chapters, ~1k+) | [construction.md](construction.md): structure before prose; sparse 2–4 moves; diversity seed; no tidy lesson close |
-| **Short agent prose** (email, bio, blurb, answers) | Flow + anti-glue + real anchors — **no** novel toys (aftermath, frame/memoir, theme scales) |
-| **StoryScope features** | Lab only when asked; honest labels; never forge; never sole ship gate |
+| **Long fiction** (stories, chapters, ~1k+) | Draft first. If structure sags, light PRE-STRUCTURE from [construction.md](construction.md): pick **0–3** moves, linear default, no tidy lesson close, diversity seed = moves you deliberately skip. Then the same two scans. |
+| **Long nonfiction** (essays, reports, ~1k+) | Draft first. If it reads as one sustained register, light PRE-DRAFT from [structure-nonfiction.md](structure-nonfiction.md): pick **2–4** palette moves, seed macro choices, name the skips. Then the same two scans. |
+| **Short agent prose** (email, bio, blurb, answers) | Draft + two scans. **No** novel toys (no time jumps, grey choice, aftermath construction). |
+| **StoryScope features** | Lab only when asked; honest labels; never forge; never a ship gate |
 
 ## Modes
 
-| Mode | Role |
-|------|------|
-| **modest** | Light skill; unforced letters/notes |
-| **balanced** | **DEFAULT SHIP** — sparse construction on long fiction |
-| **max** | Research / stress craft only — may over-stack; label it; expect readability cost |
+Modes = how much you interfere. Default: **balanced**.
+
+| Mode | Interference |
+|------|--------------|
+| **modest** | Almost none — slop scan only. Letters, notes, anything that should feel unforced |
+| **balanced** | Fix real failures, add nothing. Default |
+| **max** | Research only — stress craft; expect stiffness; never ship as product voice |
 
 See [modes.md](modes.md).
 
-## When to use
+## PRE-WRITE (four lines)
 
-**Use:** stories, emails, bios, reports, landing copy, long answers; user wants human-sounding prose.  
-**Skip:** code cleanup; pure data dumps.
-
-## Workflow
-
-```
-1. PRE-WRITE (Mode + Subject required; default balanced)
-2. Long fiction only → PRE-STRUCTURE + diversity seed + pick 2–4 moves
-   ([construction.md](construction.md)) — structure before draft
-3. Draft for genre (fiction construction OR short-prose flow)
-4. Structural FIX if needed (max 2 rounds) — not synonym swaps
-5. STYLE PASS (required for ALL forms — short and long) — full [style-and-bans.md](style-and-bans.md):
-   a. Hard-ban words / phrases / openers: zero hits
-   b. Soft bans: only literal/tech sense
-   c. Surface structure: length mix, no parataxis spam, no rule-of-three default, active voice
-   d. Punctuation: em-dash budget (~1/500w), almost no ! spam
-   e. Context formatting (email/social vs docs)
-   f. Pre-ship surface check (11 silent items) + swap cheatsheet
-6. VOICE hard fails only (sermon / ban spam / zero anchors on long text)
-   — anti-glue floor, not a quality ladder to max
-7. Optional lab: StoryScope — footnote only; never forge
-8. Ship when a careful human would finish the page
-   (NOT when VOICE or P(human) looks high)
-```
-
-**Order:** structure first on long fiction, then style/bans. Never reverse-only (polish a sermon). Never skip bans after good structure.
-
-Refs: [construction.md](construction.md) · [style-and-bans.md](style-and-bans.md) · [paper.md](paper.md) · [modes.md](modes.md) · [voice.md](voice.md) · [checklists.md](checklists.md)  
-Lab: [human_coding.md](human_coding.md) · [core_features.md](core_features.md)
-
-## PRE-WRITE (required)
+For anything over ~300 words, answer before drafting (mentally is fine for
+short prose):
 
 ```text
-NOSLOP PRE-WRITE
-Mode: modest | balanced | max
-Subject:   (what the piece is ABOUT — from the brief; not "noslop" unless asked)
+Subject:   (from the brief — never noslop/scores unless asked)
 Audience:
-Length / form:   (short agent | long fiction)
-Anchors (name / number / place / time):
-One deliberate mess / open cost / incomplete beat:
-One boring detail with no payoff:
-What I will NOT force (short: novel toys; fiction: theme dump / tidy lesson):
-Where short hits land (if natural):
-Surface risk for this genre:
-Subject check: no skill/score/repo meta in draft unless Subject allows — Y/N
+Form / length:
+Biggest risk for this piece:  (glue? sermon? over-craft? fog?)
 ```
 
-Mode omitted → **balanced**.  
-Subject omitted → take it from the **user’s content brief**.
+That’s all. No anchor quotas, no mandatory mess, no required boring detail.
 
-### Long fiction: PRE-STRUCTURE (required)
+## VOICE (flags, not a grade)
 
-After PRE-WRITE, fill PRE-STRUCTURE from [construction.md](construction.md) before any prose:
+Optional check before ship. Blocks on **hard fails** only:
 
-```text
-STORY PRE-STRUCTURE
-Premise / POV / Moral grain / Time shape / Tracks / Theme location
-World anchors (2–4 named) / Emotion policy / Ending type
-Diversity seed: one move I will NOT use
-Palette picks (2–4 max): …
-```
-
-No diversity seed or stacked full palette on long fiction → **STOP**.
-
-## Draft by genre
-
-### Short agent prose
-
-| Do | Don’t |
-|----|--------|
-| Real anchors when they help | Aftermath / twist / theme stacks |
-| One concrete ask or image | Sermon or “I used to think… turns out” close |
-| Digression OK if natural | Score-farm staccato |
-| Clean of glue/bans (full list) | Chase VOICE 9+; skip ban scan |
-| Rhythm mix, few em dashes | Template openers / “Certainly,” / “Moreover,” |
-
-### Long fiction
-
-| Do | Don’t |
-|----|--------|
-| Theme in scene / action | Narrator TED moral as ending |
-| Grey choice / open cost | Single-track tidy acceptance bow |
-| Time texture when length allows | Fake multi-scene aftermath on a 100-word beat |
-| Specific world (names, places, mess) | Vague allusions + body-emotion formula only |
-| Sparse 2–4 moves + diversity seed | Must-hit full construction pack every draft |
-| Full [style-and-bans.md](style-and-bans.md) pass before ship | “Structure is enough so bans optional” |
-
-## VOICE
-
-Soft anti-glue. Ship blocks on **hard fails** only:
-
-- moral/sermon close  
-- ban/glue spam  
-- zero anchors on long prose  
-
-Mid-range readable prose beats a stiff 9+. Higher VOICE is **not** more human. Details: [voice.md](voice.md).
+- moral/sermon close
+- ban/glue spam
+- zero anchors on long prose (pure fog)
 
 ```powershell
 $env:PYTHONPATH="src"
-.\.venv\Scripts\python.exe -m noslop.cli voice --text-file draft.md --json
+.\.venv\Scripts\python.exe -m noslop.cli voice --text-file draft.md
 ```
+
+Exit code = hard fails only. The numeric score it prints is lab diagnostics —
+**do not iterate to raise it.** Iterating on the number produces exactly the
+fragment-spam this skill exists to kill. Details: [voice.md](voice.md).
 
 ## StoryScope (lab)
 
-Only when the user asks for a diagnostic:
-
-1. Honest labels with span cites — never forge ([human_coding.md](human_coding.md))
-2. `python -m noslop.cli score --features features.json --json`
-3. Footnote only — never sole ship gate
-4. Do not require P(human) ≥ 0.5
-5. Do not treat the binary as a writing coach
+Only when the user asks for a diagnostic. Honest labels with span cites —
+never forge ([human_coding.md](human_coding.md)). Footnote only, never a ship
+gate, never a writing coach. Background: [paper.md](paper.md).
 
 ## Red flags — STOP
 
-- No PRE-WRITE (incl. **Subject**)
-- Long fiction without **PRE-STRUCTURE** / **diversity seed** / sparse palette
-- Stacked full construction palette (anti-diversity cluster)
-- **Subject hijack** — draft about noslop / VOICE / scores / the repo when they asked for other content
-- “Use noslop” treated as license to narrate the skill
-- Chasing StoryScope 0.5 or VOICE 9+ while the page is stiff (**scoremax** = fail)
-- Novel toys on a cold email
+- Rewriting a readable draft because a scan exists
+- Anchor stuffing / fragment cosplay / signature closers (you over-applied)
+- **Subject hijack** — draft about noslop / scores / the repo when they asked for other content
+- Novel construction toys on a cold email
 - Theme lecture / tidy lesson as last beat of fiction
-- FIX = synonym swaps only
-- Ban/glue spam **or** shipping without a ban pass
+- Iterating to raise VOICE or P(human) — that IS score-maxxing
+- Shipping with hard-ban words still on the page
 - Forging StoryScope feature labels
-- “Structure fixed it” while delve/moreover/tapestry still on the page
 
 ## Rationalizations
 
 | Excuse | Reality |
 |--------|---------|
-| “Use noslop + story → story about noslop” | Method ≠ subject |
-| “Analyze repo + story → story about the repo” | Analysis stays in chat unless they asked for that topic |
-| “StoryScope PASS / 0.7” | Lab metric; books ~0.13; not ship bar |
-| “VOICE 9.1 so ship” | High score + stiff craft = fail |
-| “Bans list is the whole skill” | Need construction **and** bans |
+| “The skill says add anchors/mess/unevenness” | Scans detect failures; they don’t order ingredients |
+| “Numbers in the subject line worked last time” | One skeleton repeated = template = slop |
+| “Fragments make it punchy” | Subjectless stacks are slop cosplay; keep I/you/they |
+| “VOICE 9.1 so ship” | The number is a footnote; stiff craft at 9.1 is still stiff |
+| “Bans are the whole skill” | Clean vocab + sermon close is still AI fiction |
 | “Structure is enough; skip bans” | Surface tells still read as template AI |
-| “I banned words; skip structure” | Tidy theme-sermon with clean vocab is still AI fiction |
-| “Force the full arc pack” | Over-complete craft smells model-made; sparse 2–4 only |
-| “Email needs aftermath + twist” | Genre split — short prose doesn’t |
 | “Hit every human feature to raise P(human)” | Inverts the detector; creates a new cluster |
+
+Refs: [style-and-bans.md](style-and-bans.md) · [construction.md](construction.md) · [structure-nonfiction.md](structure-nonfiction.md) · [modes.md](modes.md) · [voice.md](voice.md) · [checklists.md](checklists.md) · [paper.md](paper.md)

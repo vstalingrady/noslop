@@ -85,7 +85,13 @@ def test_readme_paper_no_undetectable_theater():
     assert "2604.03136" in r or "storyscope" in low
     assert "install" in low
     assert "undetectable" not in low
-    assert "gptzero" not in low
+    # citing detector papers is fine; evasion marketing is theater
+    for claim in (
+        "pass gptzero", "beat gptzero", "bypass gptzero", "fool gptzero",
+        "pass ai detection", "beat ai detection", "bypass ai detection",
+        "fool detectors", "evade detection",
+    ):
+        assert claim not in low, f"README makes evasion claim: {claim!r}"
     assert "balanced" in low
     # install section should appear (bottom-ish content exists)
     assert "Copy-Item" in r or "pip install" in r

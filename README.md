@@ -11,322 +11,270 @@ Write so a careful human finishes the page.</p>
 
 ## What it is
 
-Model drafts often arrive as glue, fog, and a tidy moral. noslop is a skill pack your agent loads before it writes: PRE-WRITE, **structure-first** rules for long fiction (sparse construction, not scoremax), genre split for short email/bio/blurb, and a local **VOICE** anti-glue floor — then you ship only if a careful reader would finish the page.
+noslop is a skill pack your agent loads before it writes. It works like a
+**linter, not a style**: draft plainly from the brief, then scan for two kinds
+of tells and cut only what you find —
 
-Grounded in [StoryScope](https://arxiv.org/abs/2604.03136) (Russell et al.) — findings about **how** stories are built on long fiction — plus plain flow and anti-glue for everyday agent prose. High VOICE or P(human) is **not** the win.
+1. **Slop tells** — glue words, template phrases, sermon closes, dash spam
+   ([style-and-bans.md](skills/noslop/style-and-bans.md)).
+2. **Over-application tells** — anchor stuffing, fragment cosplay, signature
+   closers, punchy one-line morals. The skill's own failure mode.
+
+That second scan is the point. Anti-slop rules applied too hard produce a new
+kind of slop: every draft comes out with the same number-stuffed, telegraphic,
+"if this is noise, delete it" skeleton. A rule pack that makes every draft
+identical just moves the cluster detectors catch. Human writing is diverse,
+so noslop's ship bar stays human: a careful reader finishes the page.
+
+## What it is not: the evenness problem
+
+Clean vocabulary is the floor, not the fix. A draft can pass every ban and
+still read as machine, because the deeper tell is **evenness** — one register
+held end to end, every section built the same way, every thought closed,
+every sentence resolving at the same rate. Research on AI text keeps landing
+on the same conclusion: style cues are weak evidence, but *construction* —
+how a piece is built — separates machine drafts from human ones (see
+[Reference papers](#reference-papers)).
+
+So noslop has two structural layers, both built as menus rather than rules:
+
+| Layer | File | For |
+|-------|------|-----|
+| Story construction | [`skills/noslop/construction.md`](skills/noslop/construction.md) | Long fiction (~1k+ words) |
+| Nonfiction structure | [`skills/noslop/structure-nonfiction.md`](skills/noslop/structure-nonfiction.md) | Long essays, reports (~1k+ words) |
+
+Each layer says the same thing in its genre's terms: pick a few moves, skip
+the rest on purpose, and never let two drafts share a skeleton.
 
 | You get | Where |
 |---------|--------|
 | Skill for Claude Code / similar | [`skills/noslop/`](skills/noslop/) |
-| Long-fiction construction guide | [`skills/noslop/construction.md`](skills/noslop/construction.md) |
-| VOICE check (anti-glue floor) | `python -m noslop.cli voice` |
+| VOICE hard-fail check (flags, not a grade) | `python -m noslop.cli voice` |
 | Optional StoryScope feature score (lab) | `python -m noslop.cli score` |
 | Side-by-side drafts + charts | [`evals/`](evals/) |
 
-**Trigger:** `noslop` · “write human” · “anti AI voice” · `/noslop`  
+**Trigger:** `noslop` · “write human” · “anti AI voice” · `/noslop`
 **Skip for:** code cleanup, pure data dumps
+
+---
+
+## The two machines
+
+What detectors measure, per the papers — three different mechanisms that all
+punish the same thing: predictability.
 
 ```mermaid
 flowchart LR
-  A[Brief] --> B[PRE-WRITE]
-  B --> C{Long fiction?}
-  C -->|yes| D[PRE-STRUCTURE + sparse 2-4 moves]
-  C -->|no| E[Draft short prose]
-  D --> F[Draft for reader]
-  E --> F
-  F --> G{Hard fail?}
-  G -->|sermon / ban spam / zero anchors| F
-  G -->|clean| H{Page flows?}
-  H -->|no structural FIX| F
-  H -->|yes| I[Ship]
+    T[Your text] --> G[GPTZero<br/>hierarchical multi-task classifier<br/>arXiv:2602.13042]
+    T --> B[Binoculars<br/>token-level surprisal<br/>arXiv:2401.12070]
+    T --> S[StoryScope<br/>discourse-level features<br/>arXiv:2604.03136]
+    G --> V{reads as machine?}
+    B --> V
+    S --> V
+    K[Kobak et al.<br/>excess vocabulary<br/>arXiv:2407.07004] -. lexical layer .-> V
 ```
+
+What noslop does about it — move before generation, not after:
+
+```mermaid
+flowchart TD
+    D[Draft plainly from the brief] --> R[Read it like a stranger]
+    R --> S1[Slop scan<br/>bans + templates, if present]
+    S1 --> S2[Over-application scan<br/>noslop tells, if present]
+    S2 --> L{How long?}
+    L -- short prose --> V
+    L -- long fiction --> C[construction.md<br/>0–3 moves, linear default]
+    L -- long nonfiction --> N[structure-nonfiction.md<br/>2–4 palette picks + macro seed:<br/>topic order, omissions, stopping points]
+    C --> V[VOICE: hard fails only]
+    N --> V
+    V --> SHIP[Ship when a careful human<br/>would finish the page]
+```
+
+noslop is a craft tool, not a detector tool. It promises a readable page,
+not a number; detector checks, when you run them, are smoke tests with a
+strict iteration budget ([detector clause](skills/noslop/structure-nonfiction.md#detector-clause)).
 
 ---
 
 ## See the difference
 
 Same brief. **default** = raw model. **noslop** = skill applied.
+Note the noslop drafts don't share a skeleton — that's deliberate. If your
+noslop outputs all look alike, you're over-applying it.
 
 ### Cold email — default
 
 ```text
-Hi,
+Hi Jordan,
 
-I hope this email finds you well. In today's rapidly evolving healthcare
-landscape, we leverage cutting-edge analytics to unlock actionable insights
-and empower clinics to streamline no-show rates. Our robust, seamless
-dashboard will revolutionize your operations.
+I hope this email finds you well. In today's competitive logistics landscape,
+we leverage cutting-edge route optimization to unlock actionable savings and
+empower fleets to streamline last-mile delivery. Our robust, seamless platform
+will revolutionize your operations.
 
-I'd love to schedule a brief call to discuss how we can foster better
-outcomes together.
+I'd love to schedule a brief call to discuss how we can foster better outcomes
+together.
 
 Best regards,
-Alex
+Sam
 ```
 
-### Cold email — noslop (balanced)
+### Cold email — noslop
 
 ```text
-Subject: Thursday morning empties vs your monthly average
+Subject: Thursday mornings at the clinic
 
-Maya —
+Hi Maya,
 
-Friend at a two-site clinic sent a stripped booking export. One Thursday
-block: fourteen slots, six empty. Monthly average still looked polite (~18%).
-The hole vanished into the average.
+A friend who runs a two-site clinic showed me their booking export last week.
+The monthly no-show rate looked fine, about 18%. Thursday mornings didn't.
+Half the early slots sat empty, and the average hid it.
 
-I fix that kind of mismatch. Jakarta hours. Shared sheet, a few days —
-not a platform demo.
+I help clinics see where the average is lying. Usually that means a shared
+sheet and a few days of looking, not new software.
 
-If useful, reply with any ugly Tuesday CSV. I'll return a marked version
-so you can see the method before anyone talks budget. WhatsApp is fine
-if email is noisy.
+If you want, send any recent booking export with names stripped and I'll
+mark the gaps. Either way, hope the Thursdays improve.
 
-If noise, delete.
-
-— Raka
-```
-
-### Short fiction — default
-
-```text
-The mall went quiet. A security guard found a child's shoe and had to decide
-what to do. It's important to note that these situations can be complex. He
-leveraged training protocols to unlock the best outcome. At the end of the
-day, what matters is caring first. I used to think the job was about rules.
-Turns out it was about heart.
-```
-
-### Short fiction — noslop (balanced)
-
-```text
-Around 1 a.m. I found a toddler sneaker under a food-court table by the
-closed pretzel stand. Left foot. Velcro half peeled. No mate.
-
-I radioed. Dispatcher said no kid tickets tonight. Bagged it, wrote the
-time, put it on the lost-and-found shelf.
-
-I didn't call the police. Walked the dock and the bus stop. Nothing. Came
-back and almost added "possible missing minor" to the log. Left the line
-clean.
-
-Thursday the shoe was gone from the shelf. Maybe a parent. Maybe staff.
-I still glance under that table when I pass. Habit more than hope.
+Raka
 ```
 
 ### Personal bio — default
 
 ```text
-I am a passionate backend engineer with a proven track record of delivering
-robust, scalable solutions. After several years at a leading technology
-company, I transitioned to logistics to make a greater impact. I thrive in
-collaborative environments and am dedicated to continuous learning. In my
-free time I enjoy sports and exploring new technologies.
+I am a passionate product designer with a proven track record of delivering
+robust, user-centric experiences. I thrive in collaborative environments and
+am dedicated to continuous learning. In my free time I enjoy hiking and
+exploring new technologies.
 ```
 
 ### Personal bio — noslop
 
 ```text
-Dina Sari, 29. Tebet desk, 7:10 a.m., coffee too hot. Shoulder tight from
-Ragunan badminton last night.
+I'm a product designer in Portland, currently on checkout for a regional
+grocer. Last thing I shipped: cut the gift-card flow from seven screens to
+three after watching people abandon carts in session recordings. Before that,
+two years on dispute flows at a payments company, which is where I stopped
+believing error messages are copy anyone reads.
 
-Left payments on-call the week hands shook on the Bekasi train. Now routing
-chili crates across Java. Pages still happen. Failures smell like diesel,
-not SLO poetry.
-
-Sunday: two sets won, one lost. Neck unclenched. Calendar says court 4 p.m.
-— non-negotiable.
-
-Still write Go. Still break staging. Sleep in my own bed after.
+Outside work I play rec soccer on Wednesdays. Bad left ankle. The team chat
+is chaos and I wouldn't have it otherwise.
 ```
 
 ### SaaS blurb — default
 
 ```text
-Our cutting-edge platform seamlessly transforms messy CSV exports into
-comprehensive monthly finance packs. Leverage AI-powered insights to unlock
-growth, streamline workflows, and empower your small business with robust,
-scalable financial clarity.
+Our cutting-edge inventory platform seamlessly transforms messy stock data
+into comprehensive, actionable insights. Leverage AI to unlock growth,
+streamline workflows, and empower your team with robust, scalable clarity.
 ```
 
 ### SaaS blurb — noslop
 
 ```text
-Tuesday 9:40 p.m. File name: orders_final_FINAL2.csv. Columns: Amt, amt ,
-AMOUNT. Refunds as blanks and as negatives. Bank tab won't match.
+Stock exports are messy. The qty column is sometimes units, sometimes cases.
+Excel strips the leading zeros off SKUs. The same shelf shows up as MAIN,
+Main, and WH-1.
 
-Drop the file in. Pack out Wednesday morning: sales by day, fees peeled,
-refunds alone. PDF + sheet.
-
-The export wasn't wrong. Mapping was. Aliases stick after run one.
-
-I still have last month's bad export on the desktop. Haven't deleted it.
-Reminder.
+Upload the file and we flag the mismatches before you trust a reorder. You
+get one plain sheet: what to buy, what to ignore, what to ask the warehouse
+about. No chatbot, no insights feed.
 ```
 
 ### Agent answer — default
 
 ```text
-Flaky Playwright tests in CI are a common challenge. It's important to note
-that timing issues often cause toast notifications to fail intermittently.
-To comprehensively address this, you should leverage robust waiting strategies
-and ensure resilient selectors. Furthermore, implementing best practices around
-retries can elevate test stability. In conclusion, take a holistic approach to
-foster more reliable end-to-end coverage.
+Redis connection errors in production are a common challenge. It's important
+to note that timeouts often cause intermittent failures. To comprehensively
+address this, you should leverage robust retry strategies and ensure proper
+configuration. Furthermore, implementing best practices around connection
+pooling can elevate reliability. In conclusion, take a holistic approach.
 ```
 
 ### Agent answer — noslop
 
 ```text
-Green local. Red CI. Same commit. 14:03 UTC.
+If the error is `READONLY You can't write against a read only replica`, your
+app is writing to a replica (or the primary failed over and the client still
+holds the old role).
 
-Toast paints ~80ms on my laptop, 400–900ms under CI load. toBeVisible() already
-timed out if you raced the click. Or the toast unmounts before you assert text.
-Or two toasts in DOM and strict mode throws.
+Check `INFO replication` on the host the app points at and look for
+`role:master`. If it says slave, point writes at the primary, or use a client
+library that follows redirects.
 
-Open the CI trace. Count [data-testid=toast] right after the action. Prefer
-getByRole('status', { name: /saved/i }). Wait on text with { timeout: 15_000 },
-not waitForTimeout(2000).
-
-Half the "toast flakes" I see: preceding API 500s on slow CI DB. Toast never
-fires. Network panel first.
-
-I left a 15s timeout in the PR. Pipeline green at 14:10. Coffee was cold.
+Retrying harder won't help here. The writes are landing on a node that can't
+accept them.
 ```
 
-More drafts: [`evals/results/modes/`](evals/results/modes/) · [`evals/results/v2/`](evals/results/v2/)
-
----
-
-## Modes
-
-Pick craft pressure. **Ship default = balanced.**
-
-```mermaid
-flowchart TB
-  subgraph ship [Ship]
-    M[modest — light, unforced]
-    B[balanced — default]
-  end
-  subgraph research [Research only]
-    X[max — full craft pressure]
-  end
-  D[default — eval control / raw slop]
-  Brief[Writing brief] --> M
-  Brief --> B
-  Brief --> X
-  Brief -.-> D
-```
-
-| Mode | When |
-|------|------|
-| **modest** | Letters, notes, anything that should feel unforced |
-| **balanced** | Most agent writing — readable, anti-glue, not score-farm |
-| **max** | Stress-testing craft only — expect stiffness; not product default |
-| *default* | Eval control arm (raw model) |
-
-Full write-up: [`skills/noslop/modes.md`](skills/noslop/modes.md) · mode drafts: [`evals/results/modes/SUMMARY.md`](evals/results/modes/SUMMARY.md)
+Older eval drafts live in [`evals/results/`](evals/results/) — the `modes/` and
+`v2/` folders predate the linter reframe and show the over-application problem
+(same skeleton on every arm) that this version fixes.
 
 ---
 
 ## How it works
 
-```mermaid
-flowchart TD
-  A[User brief] --> B[PRE-WRITE]
-  B --> B1[Mode + subject + anchors]
-  B1 --> B2[One mess / open cost]
-  B2 --> B3[What not to force]
-  B3 --> C{Genre}
-  C -->|Long fiction| D[Construction: grey choice, time texture, no theme dump]
-  C -->|Email / bio / blurb / answer| E[Flow + anchors — no novel toys]
-  D --> F[Draft]
-  E --> F
-  F --> G[VOICE hard-fail check]
-  G -->|fail| F
-  G -->|pass| H[Ban scan]
-  H --> I[Ship if a careful human finishes the page]
-  I -.->|optional lab| J[StoryScope feature score]
-```
+1. **Draft** from the brief. No checklist in hand.
+2. **Read it like a stranger.** Would a careful human finish it? Yes → ship.
+3. **Slop scan** — cut hard bans, templates, sermon closes *if present*.
+4. **Over-application scan** — cut anchor stuffing, fragment cosplay,
+   signature closers *if present*.
+5. **Long prose only** — if it sags structurally:
+   fiction → [construction.md](skills/noslop/construction.md) (0–3 moves,
+   linear default); nonfiction →
+   [structure-nonfiction.md](skills/noslop/structure-nonfiction.md)
+   (2–4 palette picks, macro seed, named skips). Short prose never gets
+   structural toys.
+6. **VOICE** — hard-fail flags only (sermon / ban spam / zero anchors).
+7. **Ship** when a careful human would finish the page.
 
-1. **PRE-WRITE** — mode, subject (what it’s *about*), anchors, one mess, what not to force  
-2. **Draft** — fiction construction **or** short-prose flow  
-3. **VOICE** — block only on sermon close, ban spam, or zero anchors on long text  
-4. **Bans** — surface cleanup ([`style-and-bans.md`](skills/noslop/style-and-bans.md))  
-5. **StoryScope** — optional lab path; never the ship gate  
+Full skill: [`skills/noslop/SKILL.md`](skills/noslop/SKILL.md)
 
-Skill pack: [`skills/noslop/`](skills/noslop/)  
-Paper notes: [`skills/noslop/paper.md`](skills/noslop/paper.md)
+## Modes
 
-noslop is **how** the agent writes. It is not the default **topic** of the draft (unless you asked for content about the tool).
+Modes = how much the skill interferes. Default: **balanced**.
 
----
+| Mode | Use |
+|------|-----|
+| **modest** | Slop scan only — letters, notes, anything that should feel unforced |
+| **balanced** | Fix what the scans catch, add nothing — default |
+| **max** | Research only — expect stiffness |
 
-## Genre split
+## VOICE and StoryScope
 
-| Form | Rules |
-|------|--------|
-| **Long fiction** | Less theme dump; greyer choice; time texture when length allows; no tidy TED close |
-| **Short agent prose** | Flow + anti-glue + real anchors — no aftermath arcs, memoir frames, or novel toys |
-
-```mermaid
-flowchart LR
-  Q{Length / form?}
-  Q -->|story / chapter| L[Long fiction craft]
-  Q -->|email / bio / blurb / Q&A| S[Short prose craft]
-  L --> Out[Readable page]
-  S --> Out
-```
+| Tool | Role |
+|------|------|
+| **VOICE** (`noslop.cli voice`) | Hard-fail flags (sermon, ban spam, fog) + fragment-stack detector. Exit code = flags only; the number is lab diagnostics — never iterate to raise it |
+| **StoryScope** (`noslop.cli score`) | Optional lab feature score vs the research binary. Honest labels only, never a ship gate |
 
 ---
 
-## Two tools
+## Reference papers
 
-| Tool | Answers | Role |
-|------|---------|------|
-| **VOICE** | Glue, sermon, fog? | Soft anti-glue on the way to ship |
-| **StoryScope** | Feature map vs research binary? | Lab only |
+The skill's design rests on these. One line each; the rules themselves stay
+general on purpose.
 
-```mermaid
-flowchart LR
-  Draft[Draft text] --> V[VOICE]
-  Draft --> F[Feature map]
-  F --> S[StoryScope score]
-  V --> Ship[Ship decision]
-  S -.-> Lab[Lab footnote]
-```
-
-Book baseline notes: [`evals/results/HUMAN_BASELINE.md`](evals/results/HUMAN_BASELINE.md)
-
----
-
-## Charts
-
-From the VOICE A/B suite ([`evals/results/SUMMARY_V2.md`](evals/results/SUMMARY_V2.md)):
-
-| Brief | default | noslop |
-|-------|---------|--------|
-| mall shoe | 0.88 | 9.12 |
-| cold email | 4.91 | 9.12 |
-| bio | 3.16 | 9.12 |
-| SaaS blurb | 3.16 | 8.25 |
-| agent answer | 5.26 | 8.25 |
-
-![VOICE scores](evals/results/figures/voice_scores_default_vs_noslop.png)
-
-![Score lift](evals/results/figures/voice_delta.png)
-
-![Per-axis breakdown](evals/results/figures/voice_axes_heatmap.png)
-
-![StoryScope A/B](evals/results/figures/storyscope_default_vs_noslop.png)
-
-![Book excerpts on StoryScope](evals/results/figures/human_books_baseline.png)
+| Paper | What it shows | What noslop takes from it |
+|-------|---------------|---------------------------|
+| **StoryScope** — Russell et al., [arXiv:2604.03136](https://arxiv.org/abs/2604.03136) | Discourse-level features alone separate AI fiction from human at 93% F1 with style removed: AI over-explains themes, closes every thread, and clusters in one region of narrative space | Structure outranks style. Both construction layers exist because of this paper; the diversity seed exists because of the clustering finding |
+| **GPTZero** — Adam et al., [arXiv:2602.13042](https://arxiv.org/abs/2602.13042) | Industrial detection is a hierarchical multi-task classifier, red-teamed against paraphrasing and adversarial edits | Post-hoc word swaps don't move modern detectors. The only honest lever is how the draft is built |
+| **Binoculars** — Hans et al., [arXiv:2401.12070](https://arxiv.org/abs/2401.12070) | Token-level predictability separates machine text at >90% recall with near-zero false positives | Human writing is genuinely unpredictable at the *choice* level — hence the macro seed: topic order, real omissions, early stopping points |
+| **Detector disagreement** — Alshammari & Rao, [arXiv:2507.17944](https://arxiv.org/abs/2507.17944) | Automated "humanizer" attacks only half-work, and detectors disagree wildly across vendors | One smoke test, one detector, one structural re-pass at most. No paraphrase tools, no score farming |
+| **Excess vocabulary** — Kobak et al., [arXiv:2407.07004](https://arxiv.org/abs/2407.07004) | AI text carries a lexical fingerprint (the "delve" class of words) | The ban list in [style-and-bans.md](skills/noslop/style-and-bans.md) — the surface layer, owned there |
 
 ---
 
 ## Install
 
 ### Skill (Claude Code / similar)
+
+Via the [skills CLI](https://skills.sh) (repo is public):
+
+```bash
+npx skills add vstalingrady/noslop
+```
+
+Or manually:
 
 ```powershell
 Copy-Item -Force .\skills\noslop\* $env:USERPROFILE\.claude\skills\noslop\
@@ -357,11 +305,11 @@ $env:PYTHONPATH="src"
 noslop/
   assets/logo.jpg
   skills/noslop/           # agent skill (install this)
+    construction.md        # long-fiction structure layer
+    structure-nonfiction.md # long-nonfiction structure layer
   src/noslop/              # voice + optional StoryScope CLI
   artifacts/               # taxonomy + model weights
-  evals/results/modes/     # modest / balanced / max drafts
-  evals/results/v2/        # default vs noslop pairs
-  evals/results/figures/   # charts
+  evals/results/           # A/B drafts (older arms show the old regime)
   tests/
 ```
 
@@ -369,5 +317,5 @@ noslop/
 
 ## License
 
-MIT. StoryScope notices: [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).  
+MIT. StoryScope and surface-list notices: [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 Paper: [arXiv:2604.03136](https://arxiv.org/abs/2604.03136).
